@@ -26,36 +26,42 @@ $instruments = $conn->query( "SELECT * FROM `instruments`" );
         </tr>
         
         <?php
+          $index = 1;
           if ($instruments->num_rows > 0) {
             while($row = $instruments->fetch_assoc()) { 
-              $facilities = $conn->query( "SELECT * FROM `facilities`" );
+              $table_instrument_id = $row['id'];
+              $facilities = $conn->query( "SELECT * FROM `facilities` WHERE `Instrument_id` = '$table_instrument_id'" );
 
               if ($facilities->num_rows > 0) {
-            while($row_inner = $facilities->fetch_assoc()) :?> 
+                while($row_inner = $facilities->fetch_assoc()) :?> 
 
-              <tr>
-                <td style="width:5%"><b>1</b>
-                </td>
-                          
-                <td style="width:10%">
-                  <div class="input-group input-group-sm mb-0">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <input type="checkbox" aria-label="Checkbox for following text input">
+                <tr>
+                  <td style="width:5%"><b><?= $index++; ?></b>
+                  </td>
+                            
+                  <td style="width:10%">
+                    <div class="input-group input-group-sm mb-0">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <input type="checkbox">
+                        </div>
                       </div>
+                      <input type="text" class="form-control" value="1">
                     </div>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox">
-                  </div>
-                </td>
+                  </td>
 
-                <td>LC-MS-QTOF</td>
-                <td style="width:25%;"><ul><li>MS+VE</li></ul>
-                <td style="width:18%"><?=numberToCurrency(4500);?><br></td>
-                <td style="width:18%"><?=numberToCurrency(2250);?><br></td>
-                <td>per mode<br></td>
-              </tr>
+                  <td><?= $row['instrument']; ?></td>
+                  <td style="width:25%;"><ul><li><?= $row_inner['facility']; ?></li></ul>
+                  <td style="width:18%"><?= numberToCurrency($row_inner['industry_charge']); ?><br></td>
+                  <td style="width:18%"><?= numberToCurrency($row_inner['institute_charge']); ?><br></td>
+                  <td><?= $row_inner['remark']; ?><br></td>
+                </tr>
 
-            <?php end while; ?>
+                <?php endwhile; 
+              }
+            }
+          }
+        ?>
                         
           
       </tbody>
