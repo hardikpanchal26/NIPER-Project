@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2018 at 03:53 PM
+-- Generation Time: Sep 15, 2018 at 03:59 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -58,6 +58,14 @@ CREATE TABLE `facilities` (
   `institute_charge` int(11) NOT NULL,
   `remark` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `facilities`
+--
+
+INSERT INTO `facilities` (`id`, `instrument_id`, `facility`, `industry_charge`, `institute_charge`, `remark`) VALUES
+(1, 1, 'MS+VE', 4500, 2250, 'per mode'),
+(2, 1, 'MS-VE', 4500, 2250, 'per mode');
 
 -- --------------------------------------------------------
 
@@ -153,7 +161,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `facilities`
 --
 ALTER TABLE `facilities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `instruments`

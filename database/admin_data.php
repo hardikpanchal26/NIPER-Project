@@ -22,7 +22,7 @@ if ( isset( $_POST['add_facility'] ) ) {
 	$remarks           = $_POST['remarks'];
 
 
-	$sql = "INSERT INTO `facilities` (`id`, `instrument_id`, `facility`, `industry_charge`, `institute_charge`, `remark`) VALUES (NULL, '$instrument_id', '$facility', '$industry_charge', '$institute_charge', 'remarks');";
+	$sql = "INSERT INTO `facilities` (`id`, `instrument_id`, `facility`, `industry_charge`, `institute_charge`, `remark`) VALUES (NULL, '$instrument_id', '$facility', '$industry_charge', '$institute_charge', '$remarks');";
 
 	if ( $conn->query($sql) ) {
     	$_SESSION['facility_added'] = $facility;
