@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2018 at 07:39 PM
+-- Generation Time: Sep 15, 2018 at 03:53 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -53,10 +53,10 @@ INSERT INTO `admins` (`id`, `username`, `password`, `name`, `email`, `role`) VAL
 CREATE TABLE `facilities` (
   `id` int(11) NOT NULL,
   `instrument_id` int(11) NOT NULL,
-  `facility` int(11) NOT NULL,
+  `facility` varchar(80) NOT NULL,
   `industry_charge` int(11) NOT NULL,
-  `institute charge` int(11) NOT NULL,
-  `remark` int(11) NOT NULL
+  `institute_charge` int(11) NOT NULL,
+  `remark` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -77,7 +77,43 @@ CREATE TABLE `instruments` (
 
 INSERT INTO `instruments` (`id`, `instrument`, `admin_id`) VALUES
 (1, 'LC-MS-QTOF', 1),
-(2, 'HPLC', 1);
+(2, 'HPLC', 1),
+(3, 'FTIR', 1),
+(4, 'ATR', 1),
+(5, 'SEMI-PREP HPLC', 1),
+(6, 'GC', 1),
+(7, 'POLARIMETER', 1),
+(8, 'DSC', 1),
+(9, 'TGA', 1),
+(10, 'POROSIMETER', 1),
+(11, 'RT-PCR', 1),
+(12, 'TEXTURE ANALYZER', 1),
+(13, 'UV- VISIBLE SPECTROSCOPY', 1),
+(14, 'GPC', 1),
+(15, 'FACS', 1),
+(16, 'CONFOCAL MICROSCOPE', 1),
+(17, 'FLASH CHROMATOGRAPHY', 1),
+(18, 'INVERTED MICROSCOPE', 1),
+(19, 'HOTSTAGE MICROSCOPE', 1),
+(20, 'AUTOCOATER', 1),
+(21, 'STABILITY CHAMBER', 1),
+(22, 'RHEOMETER', 1),
+(23, 'ZETASIZER', 1),
+(24, 'ULTRA CENTRIFUGE', 1),
+(25, 'BIO ANALYZER', 1),
+(26, 'MAGNETOMETER', 1),
+(27, 'RAPID MIXER GRANULATOR', 1),
+(28, 'POTENTIOSTAT- GALVANOSTAT (PGSTAT)', 1),
+(29, 'RAPID MIXER GRANULATOR', 1),
+(30, 'MASTERSIZER', 1),
+(31, 'ROTARY COMPRESSION MACHINE', 1),
+(32, 'PIEZOMETER', 1),
+(33, 'UNIVERSAL TESTING MACHINE', 1),
+(34, 'NANODROP', 1),
+(35, 'ELECTRO SPINNING SETUP', 1),
+(36, 'USP Dissolution Apperatus-IV', 1),
+(37, 'ATC FACILITY INCLUDES', 1),
+(38, 'ANIMAL HOUSE FACILITY INCLUDES', 1);
 
 --
 -- Indexes for dumped tables
@@ -123,7 +159,7 @@ ALTER TABLE `facilities`
 -- AUTO_INCREMENT for table `instruments`
 --
 ALTER TABLE `instruments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Constraints for dumped tables
