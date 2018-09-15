@@ -173,7 +173,7 @@
  .breadcrumb .container > span > span:last-child { padding-left:5px; }
  .breadCurrent, .breadCurrent span { display:inline-block; line-height:32px; }
  
- /*inner with sidebar*/ .leftContent { width:100%; padding: 0 0 0 310px; margin-right:0; float:right; }
+ /*inner with sidebar*/ .leftContent { width:100%; padding: 0 0 0 310px; margin-right:0;}
  .leftContent a { font-weight: 700; }
  .leftContent p { font-size: 16px; }
 
@@ -185,7 +185,7 @@
  .pageLink ul { margin-top:5px; }
  .pageLink li { margin-bottom:5px; padding:5px; }
  .pageLink li a { color:#585858; text-decoration:none; }
- .pageLink li a:hover { color:#df6010; }
+ .pageLink li a:hover { color: #102D5E; }
  
  .selectMenu { width:100%; border:1px solid #ddd; padding:10px; display:none; }
  #selectMenu { display:none; position:relative; z-index:8; margin:0 15px; }
