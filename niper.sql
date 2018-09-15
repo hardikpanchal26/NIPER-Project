@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2018 at 03:59 PM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.4
+-- Generation Time: Sep 15, 2018 at 07:02 PM
+-- Server version: 10.1.34-MariaDB
+-- PHP Version: 7.0.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -65,7 +65,30 @@ CREATE TABLE `facilities` (
 
 INSERT INTO `facilities` (`id`, `instrument_id`, `facility`, `industry_charge`, `institute_charge`, `remark`) VALUES
 (1, 1, 'MS+VE', 4500, 2250, 'per mode'),
-(2, 1, 'MS-VE', 4500, 2250, 'per mode');
+(2, 1, 'MS-VE', 4500, 2250, 'per mode'),
+(3, 1, 'HR-MS', 5500, 2750, 'per mode'),
+(4, 1, 'HRMS-MS', 10000, 5000, 'per mode'),
+(5, 2, 'Qualitative Analysis', 3500, 1750, 'per run'),
+(6, 2, 'Qualitative Analysis', 1500, 750, 'per run'),
+(7, 3, 'Standard', 1500, 750, 'per sample'),
+(8, 4, 'Standard', 1500, 750, 'per sample'),
+(9, 5, 'Standard', 7000, 3500, 'per run'),
+(10, 6, 'Standard', 3000, 1500, 'per sample'),
+(11, 7, 'Specific Optical Rotation for each Wavelength', 3000, 1500, 'per Spectrum'),
+(12, 7, 'Optical Rotation for each Wavelength', 2000, 1000, 'per Spectrum'),
+(13, 8, 'Standard', 4000, 2000, 'per hour of Instrument time'),
+(14, 9, 'Standard', 4000, 2000, 'per hour of Instrument time'),
+(15, 10, 'Standard', 5500, 2750, 'per sample'),
+(16, 11, 'Standard', 1500, 750, 'Per sample With Cyber green Dye'),
+(18, 11, 'Standard', 3000, 1500, 'Per sample With Taqman Dye'),
+(19, 12, 'Standard', 2000, 1000, 'per sample'),
+(20, 13, 'Full spectra', 1500, 750, 'per sample'),
+(21, 13, 'Peltier kinetics', 7000, 3500, 'per hour'),
+(22, 14, 'Standard', 6000, 3000, 'per sample'),
+(23, 15, 'For analysis', 1000, 500, 'per sample'),
+(24, 15, 'For Sorting', 5000, 2500, 'per Hour (Excluding Reagents and Consumables For Each Sample)'),
+(25, 16, 'Live Cell Imaging', 7000, 3500, 'per sample'),
+(26, 16, 'Fixed Sample cell', 4500, 2250, 'per sample');
 
 -- --------------------------------------------------------
 
@@ -161,7 +184,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `facilities`
 --
 ALTER TABLE `facilities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `instruments`
