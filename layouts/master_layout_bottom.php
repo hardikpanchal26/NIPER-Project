@@ -17,6 +17,7 @@
     
 	<script type="text/javascript" src="assets/javascript/functions.js"></script>
 	<script type="text/javascript" src="assets/javascript/general.js"></script>
+  <script type="text/javascript" src="assets/javascript/cost_calculator.js"></script>
 </body>
 
 </html>
