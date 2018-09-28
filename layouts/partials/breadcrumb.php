@@ -1,3 +1,5 @@
+<?php
+?>
 <div class="breadcrumb">
   <div class="container">
     <span id="ContentPlaceHolder1_BreadCrumbControl1_SiteMapPath1">
@@ -38,4 +40,3 @@
     <?php endif; ?>
   </div>
 </div>
-    
