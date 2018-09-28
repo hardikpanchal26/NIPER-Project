@@ -30,6 +30,12 @@
         </span>
       </span>
     </span>
+    <?php
+      if(isset($_SESSION ['admin_logged_in']) ) :?>
+        <form method="POST" action="database/admin_data.php" style="float:right">
+          <button type="submit" name="admin_logout" class="btn btn-danger" style="width:150px"><i class="fa fa-power-off pr-2"></i>Logout</button>   
+        </form>
+    <?php endif; ?>
   </div>
 </div>
     

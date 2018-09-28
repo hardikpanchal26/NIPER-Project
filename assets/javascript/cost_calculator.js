@@ -117,6 +117,10 @@
 
       $('#institute_total').attr('data-value' , 0);
       $('#institute_total b').html('₹ ' + 0);
+
+      $('.the_checkbox').prop('checked', false);
+      $('.the_unit').attr('data-value' , 0);
+      $('.the_unit').val("1");
     });
 
   });

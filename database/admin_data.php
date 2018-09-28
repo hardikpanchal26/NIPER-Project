@@ -2,9 +2,33 @@
 session_start();
 include 'config.php';
 
+if( isset( $_POST['admin_login'] ) ) {
+
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	
+	$auth    = $conn->query("SELECT * FROM `admins` WHERE `username`='$username'");
+	$auth = $auth->fetch_assoc();
+	$db_password = $auth['password'];
+
+	if (password_verify($password, $db_password)) {
+		$_SESSION['admin_logged_in'] = $username; 
+	}
+	
+	else { 
+		$_SESSION['invalid'] = true; 
+	} 
+
+}
+
+if( isset( $_POST['admin_logout'] ) ) {
+	session_destroy();
+}
+
 if ( isset( $_POST['add_instrument'] ) ) {
 	$instrument = $_POST['instrument'];
-	$sql = "INSERT INTO `instruments`(`id`, `instrument`, `admin_id`) VALUES (NULL,'$instrument','1')";
+	$supervisor = $_POST['supervisor'];
+	$sql = "INSERT INTO `instruments`(`id`, `instrument`, `admin_id`) VALUES (NULL,'$instrument','$supervisor')";
 
 	if ( $conn->query($sql) ) {
     	$_SESSION['instrument_added'] = $instrument;
@@ -30,5 +54,6 @@ if ( isset( $_POST['add_facility'] ) ) {
     	$_SESSION['facility_added'] = FALSE;
 	}
 }
+
 
 header( 'location: ../niper-admin.php' );

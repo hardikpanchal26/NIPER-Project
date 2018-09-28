@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 include 'database/config.php';
 include 'layouts/master_layout_top.php'; 
 
@@ -63,11 +63,11 @@ $instruments = $conn->query( "SELECT * FROM `instruments`" );
         <tr>
           <td style="width:5%"><b>#</b></td>
           <td style="width:10%"><b>Unit</b></td>
-          <td><b>Instrument</b></td>
-          <td style="width:25%"><b>Facility</b></td>
-          <td style="width:18%"><b>Charges for Industries</b></td>
-          <td style="width:18%"><b>Charges for Institues</b></td>
-          <td><b>Remarks</b></td>
+          <td style="width:18%"><b>Instrument</b></td>
+          <td style="width:23%"><b>Facility</b></td>
+          <td style="width:16%"><b>Charges for Industries</b></td>
+          <td style="width:16%"><b>Charges for Institues</b></td>
+          <td style="width:12%"><b>Remarks</b></td>
         </tr>
         
         <?php
@@ -81,24 +81,24 @@ $instruments = $conn->query( "SELECT * FROM `instruments`" );
                 while($row_inner = $facilities->fetch_assoc()) :?> 
 
                 <tr id="index_<?= $index; ?>">
-                  <td style="width:5%"><b><?= $index++; ?></b>
+                  <td><b><?= $index++; ?></b>
                   </td>
                             
-                  <td style="width:10%">
-                    <div class="input-group input-group-sm mb-0">
+                  <td>
+                    <div class="input-group input-group-sm input-calc mb-0">
                       <div class="input-group-prepend">
                         <div class="input-group-text">
                           <input type="checkbox" class="the_checkbox" style="cursor: pointer;">
                         </div>
                       </div>
-                      <input type="text" data-value="0" class="the_unit form-control" value="1">
+                      <input type="number" data-value="0" class="the_unit form-control" value="1">
                     </div>
                   </td>
 
                   <td><?= $row['instrument']; ?></td>
-                  <td style="width:25%;"><ul><li><?= $row_inner['facility']; ?></li></ul>
-                  <td style="width:18%" class="industry_charge" data-charge="<?=$row_inner['industry_charge']?>"><?= numberToCurrency($row_inner['industry_charge']); ?><br></td>
-                  <td style="width:18%" class="institute_charge" data-charge="<?=$row_inner['institute_charge']?>"><?= numberToCurrency($row_inner['institute_charge']); ?><br></td>
+                  <td><ul><li><?= $row_inner['facility']; ?></li></ul>
+                  <td class="industry_charge" data-charge="<?=$row_inner['industry_charge']?>"><?= numberToCurrency($row_inner['industry_charge']); ?><br></td>
+                  <td class="institute_charge" data-charge="<?=$row_inner['institute_charge']?>"><?= numberToCurrency($row_inner['institute_charge']); ?><br></td>
                   <td><?= $row_inner['remark']; ?><br></td>
                 </tr>
 
@@ -112,7 +112,5 @@ $instruments = $conn->query( "SELECT * FROM `instruments`" );
       </tbody>
     </table>
   </div>
-
-
 
 <?php include 'layouts/master_layout_bottom.php'; ?>

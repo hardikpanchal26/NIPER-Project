@@ -140,3 +140,17 @@ function goBack() {
     window.history.back();
 }
 
+function get_facility() {
+	var instrument = $("#selected_instrument").val();
+
+	$.ajax({
+    	type:'POST',
+        url:'database/ajax_data.php',
+        data: {instrument_id: instrument},
+        success:function(html){
+        	$('#facility').html(html);
+        }
+
+    });
+}
+

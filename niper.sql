@@ -86,7 +86,7 @@ INSERT INTO `facilities` (`id`, `instrument_id`, `facility`, `industry_charge`, 
 (21, 13, 'Peltier kinetics', 7000, 3500, 'per hour'),
 (22, 14, 'Standard', 6000, 3000, 'per sample'),
 (23, 15, 'For analysis', 1000, 500, 'per sample'),
-(24, 15, 'For Sorting', 5000, 2500, 'per Hour (Excluding Reagents and Consumables For Each Sample)'),
+(24, 15, 'For Sorting (Excluding Reagents and Consumables For Each Sample)', 5000, 2500, 'per hour'),
 (25, 16, 'Live Cell Imaging', 7000, 3500, 'per sample'),
 (26, 16, 'Fixed Sample cell', 4500, 2250, 'per sample');
 
