@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-<?php 
-=======
 <?php
 $url_beardcrumb_name = basename($_SERVER['REQUEST_URI']);
 $name_string = explode(".", $url_beardcrumb_name);
@@ -18,8 +15,6 @@ if($beardcrumb_name == "Instrumentlistandcharges"){
 } elseif($beardcrumb_name == "Niper-admin"){
   echo "<style> #Niper-admin{ background: #212529; border-radius: 10px; } #Niper-admin a{ color: #ffffff; } </style>";
 }
->>>>>>> fe9c503c72f0c035e3d343ac76c70002e62dd643
-//session_start();
 if ( isset($_SESSION['admin_logged_in']) ) : ?>
   <div class="sideBar">
     <div id="ContentPlaceHolder1_UserLeftMiddleMenu1_LeftMenu" class="rightMenu" style="background: #212529">
@@ -34,24 +29,12 @@ if ( isset($_SESSION['admin_logged_in']) ) : ?>
         <li>
           <a href="<?php echo site_url().'/admin/instrument_list.php'; ?>" target='_self' title='Instrument List' style="color: #aeaeae"><i class="fa fa-list pr-2"></i> Instrumentation Facility List</a>
         </li>
-<<<<<<< HEAD
-
-        <li>
-          <a href="<?php echo site_url().'/admin/add_instrumentation_facility.php'; ?>" target='_self' title='Add Instrumentation Facility' style="color: #aeaeae"><i class="fa fa-flask pr-2"></i> Add Instrumentation Facility</a>
-        </li>
-
-        <li>
-          <a href="<?php echo site_url().'/admin/admins_supervisors.php'; ?>" target='_self' title='Admins / Supervisors' style="color: #aeaeae"><i class="fa fa-user-circle-o pr-2"></i> Admins / Supervisors </a>
-        </li>
-
-=======
         <li>
           <a href="<?php echo site_url().'/admin/add_instrumentation_facility.php'; ?>" target='_self' title='Add Instrumentation Facility' style="color: #aeaeae"><i class="fa fa-flask pr-2"></i> Add Instrumentation Facility</a>
         </li>
         <li>
           <a href="<?php echo site_url().'/admin/admins_supervisors.php'; ?>" target='_self' title='Admins / Supervisors' style="color: #aeaeae"><i class="fa fa-user-circle-o pr-2"></i> Admins / Supervisors </a>
         </li>
->>>>>>> fe9c503c72f0c035e3d343ac76c70002e62dd643
         <li>
           <a href= "<?php echo site_url().'/admin/reset_password.php'; ?>" target='_self' title='Reset Password' style="color: #aeaeae"><i class="fa fa-refresh pr-2"></i> Reset Password</a>
         </li>
@@ -65,7 +48,6 @@ if ( isset($_SESSION['admin_logged_in']) ) : ?>
     <div id="ContentPlaceHolder1_UserLeftMiddleMenu1_LeftMenu" class="rightMenu">
       <span class='heading'>Instrument Facility</span>
       <ul id='menuLeft' class='pageLink'>
-<<<<<<< HEAD
         <li>
           <a href=<?php echo site_url().'/users/instrumentlistandcharges.php'; ?> target='_self' title='Instrument List and Charges' ><i class="fa fa-flask pr-2"></i> Instrument List and Charges</a>
         </li>
@@ -82,32 +64,10 @@ if ( isset($_SESSION['admin_logged_in']) ) : ?>
           <a href=<?php echo site_url().'/users/check_status.php'?> target='_self' title='Niper Admin' ><i class="fa fa-tasks pr-2"></i> Check Status</a>
         </li>
         <li>
-=======
-        <li id="Instrumentlistandcharges">
-          <a href=<?php echo site_url().'/users/instrumentlistandcharges.php'; ?> target='_self' title='Instrument List and Charges'><i class="fa fa-flask pr-2"></i> Instrument List and Charges</a>
-        </li>
-        <li id="Niper_personnel">
-          <a href=<?php echo site_url().'/users/niper_personnel.php'?> target='_self' title='Instrument List and Charges' ><i class="fa fa-graduation-cap pr-2"></i> NIPER Personnel</a>
-        </li>
-        <li id="Institutes_govt_and_private">
-          <a href=<?php echo site_url().'/users/institutes_govt_and_private.php'?> target='_self' title='Instrument List and Charges' ><i class="fa fa-university pr-2"></i> Institutes (Govt. and Private)</a>
-        </li>
-        <li id="Industries">
-          <a href=<?php echo site_url().'/users/industries.php'?> target='_self' title='Instrument List and Charges' ><i class="fa fa-industry pr-2"></i> Industries</a>
-        </li>
-        <li id="Check_status">
-          <a href=<?php echo site_url().'/users/check_status.php'?> target='_self' title='Niper Admin' ><i class="fa fa-tasks pr-2"></i> Check Status</a>
-        </li>
-        <li id="Niper-admin">
->>>>>>> fe9c503c72f0c035e3d343ac76c70002e62dd643
           <a href=<?php echo site_url().'/admin/niper-admin.php'?> target='_self' title='Niper Admin' ><i class="fa fa-lock pr-2"></i> NIPER Admin</a>
         </li>
       </ul> 
       <br style='clear: left' />
     </div>
   </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> fe9c503c72f0c035e3d343ac76c70002e62dd643
 <?php endif; ?>
