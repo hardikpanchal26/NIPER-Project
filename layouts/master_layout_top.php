@@ -1,4 +1,8 @@
-<?php include 'functions.php'; ?>
+<?php 
+session_start();
+include DIRNAME( __DIR__ ).'/database/config.php';
+include DIRNAME( __DIR__ ).'/functions.php'; 
+?>
 <html>  
 <head>
   <title>
@@ -12,16 +16,15 @@
   <div style="transform: none;">
     <div id="wrapper" style="transform: none;">
       <?php 
-        include 'partials/header.php'; 
-        include 'partials/navbar.php';
+        include DIRNAME( __DIR__ ).'/partials/header.php'; 
+        include DIRNAME( __DIR__ ).'/partials/navbar.php';
       ?>
 
       <div id="content" >
-        <?php include 'layouts/partials/breadcrumb.php'; ?>
+        <?php include DIRNAME( __DIR__ ).'/partials/breadcrumb.php'; ?>
       </div> 
     
         <div class="m-5">
           
-          <?php include 'layouts/partials/sidebar.php'; ?>
+          <?php include DIRNAME( __DIR__ ).'/partials/sidebar.php'; ?>
 
-          <div class="leftContent">

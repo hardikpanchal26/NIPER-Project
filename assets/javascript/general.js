@@ -134,6 +134,8 @@ var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.
 		}
 	};
 
+	//DataTables 
+
 })(jQuery);
 
 function goBack() {
@@ -145,7 +147,7 @@ function get_facility() {
 
 	$.ajax({
     	type:'POST',
-        url:'database/ajax_data.php',
+        url:'../database/ajax_data.php',
         data: {instrument_id: instrument},
         success:function(html){
         	$('#facility').html(html);

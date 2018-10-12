@@ -24,19 +24,26 @@ function numberToCurrency($num)
 }
 
 function site_url() {
-  return 'localhost/niper';
+  return sprintf(
+    "%s://%s",
+    isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
+    $_SERVER['SERVER_NAME'].'/niper'
+  );
 }
 
 function head() {  
   echo '
-  <link rel="icon" id="lnkFavicon" type="image" href="assets/images/favicon.ico" />
+  <link rel="icon" id="lnkFavicon" type="image" href="../assets/images/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 
-  <script src="assets/javascript/jquery.min.js" type="text/javascript"></script>
-
+  <script src="../assets/javascript/jquery.min.js" type="text/javascript"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">  
-  <link href="assets/css/default.css" type="text/css" rel="stylesheet" />
+  <link href="../assets/css/default.css" type="text/css" rel="stylesheet" />
+  <link href="../assets/css/style.css" type="text/css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
   ';
 }
 

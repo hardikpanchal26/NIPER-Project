@@ -1,12 +1,12 @@
 <?php 
-session_start();
-include 'database/config.php';
-include 'layouts/master_layout_top.php'; 
+include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php'; 
 
 $instruments = $conn->query( "SELECT * FROM `instruments`" );
 
 ?>
-<div class="table-responsive">
+
+<div class="leftContent">
+  <div class="table-responsive">
     <table class="table table-striped" style="text-align: left">
       <thead class="thead-dark" >
         <tr>
@@ -96,7 +96,7 @@ $instruments = $conn->query( "SELECT * FROM `instruments`" );
                   </td>
 
                   <td><?= $row['instrument']; ?></td>
-                  <td><ul><li><?= $row_inner['facility']; ?></li></ul>
+                  <td><ul><li><?= $row_inner['facility']; ?></li></ul></td>
                   <td class="industry_charge" data-charge="<?=$row_inner['industry_charge']?>"><?= numberToCurrency($row_inner['industry_charge']); ?><br></td>
                   <td class="institute_charge" data-charge="<?=$row_inner['institute_charge']?>"><?= numberToCurrency($row_inner['institute_charge']); ?><br></td>
                   <td><?= $row_inner['remark']; ?><br></td>
@@ -110,7 +110,10 @@ $instruments = $conn->query( "SELECT * FROM `instruments`" );
                         
           
       </tbody>
+
     </table>
   </div>
+</div>
 
-<?php include 'layouts/master_layout_bottom.php'; ?>
+
+<?php include DIRNAME(__DIR__).'/layouts/master_layout_bottom.php'; ?>

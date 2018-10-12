@@ -1,2 +1,2 @@
-<?php header('location: instrumentlistandcharges.php');
+<?php header('location: users/instrumentlistandcharges.php');
 ?>

@@ -12,17 +12,22 @@ if( isset( $_POST['admin_login'] ) ) {
 	$db_password = $auth['password'];
 
 	if (password_verify($password, $db_password)) {
-		$_SESSION['admin_logged_in'] = $username; 
+		$_SESSION['admin_logged_in'] = $username;
+		echo "<script type='text/javascript'> document.location = '../admin/admin_dashboard.php'; </script>";
+ 
 	}
 	
 	else { 
 		$_SESSION['invalid'] = true; 
+		echo "<script type='text/javascript'> document.location = '../admin/niper-admin.php'; </script>";
+
 	} 
 
 }
 
 if( isset( $_POST['admin_logout'] ) ) {
 	session_destroy();
+	echo "<script type='text/javascript'> document.location = '../admin/niper-admin.php'; </script>";
 }
 
 if ( isset( $_POST['add_instrument'] ) ) {
@@ -35,6 +40,8 @@ if ( isset( $_POST['add_instrument'] ) ) {
 	} else {
     	$_SESSION['instrument_added'] = FALSE;
 	}
+
+	echo "<script type='text/javascript'> document.location = '../admin/add_instrumentation_facility.php'; </script>";
 }
 
 if ( isset( $_POST['add_facility'] ) ) {
@@ -53,7 +60,6 @@ if ( isset( $_POST['add_facility'] ) ) {
 	} else {
     	$_SESSION['facility_added'] = FALSE;
 	}
+
+	echo "<script type='text/javascript'> document.location = '../admin/add_instrumentation_facility.php'; </script>";
 }
-
-
-header( 'location: ../niper-admin.php' );

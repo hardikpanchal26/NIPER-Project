@@ -128,3 +128,7 @@
   -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }
+
+.dashboard_data h4, .dashboard_data h2, .dashboard_data h1 {
+  color: #ffffff;
+}

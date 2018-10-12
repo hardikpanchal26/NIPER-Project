@@ -1,6 +1,48 @@
+function applicant_total() {
+      
+      facility = $('#facility').val();
+      nos = $('#nos').val();
+
+      if(nos == '') {
+        return false;
+      }
+      else if(nos < 1 || nos > 50) {
+        alert('Please Enter No of Samples between 0 to 50');
+        $('#nos').val('1');
+      }
+
+      if(facility == '-- Select Facility --') {
+        $('#nos').val('1');        
+        alert('Please Select a Facility');
+        return false;
+      }
+
+      
+      $.ajax({
+      type:'POST',
+        url:'../database/ajax_data.php',
+        data: {facility_id: facility},
+        dataType: 'JSON',
+        success:function(facility){
+          $('#charge').val(facility.institute_charge);
+          var gst   = Math.round((0.18) * facility.institute_charge);
+          $('#gst').val(gst);
+          var total = $('#nos').val() * (parseInt(facility.institute_charge) + parseInt(gst));
+          $('#total').val(total);
+        }
+      }); 
+
+}
+
+function enter_nos() {
+  if(nos == '') {
+        alert('Please Enter No of Samples between 0 to 50');
+        $('#nos').val(1);
+        applicant_total();
+      }
+}
 
   $(function () {
-        //$('#index_1').find('.industry_charge').
         $.calculate_basic_charge = function( index_id ) {
           var current_industry_charge  =  $('#'+index_id + ' .industry_charge').attr('data-charge');
           var current_institute_charge  =  $('#'+index_id + ' .institute_charge').attr('data-charge');

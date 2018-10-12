@@ -173,7 +173,8 @@
  .breadcrumb .container > span > span:last-child { padding-left:5px; }
  .breadCurrent, .breadCurrent span { display:inline-block; line-height:32px; }
  
- /*inner with sidebar*/ .leftContent { width:100%; padding: 0 0 0 310px; margin-right:0;}
+ /*inner with sidebar*/ 
+ .leftContent { width:100%; padding: 0 0 0 310px; margin-right:0;}
  .leftContent a { font-weight: 700; }
  .leftContent p { font-size: 16px; }
 
