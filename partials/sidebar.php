@@ -1,4 +1,5 @@
 <?php
+/*
 $url_beardcrumb_name = basename($_SERVER['REQUEST_URI']);
 $name_string = explode(".", $url_beardcrumb_name);
 $beardcrumb_name = ucfirst($name_string[0]);
@@ -15,6 +16,7 @@ if($beardcrumb_name == "Instrumentlistandcharges"){
 } elseif($beardcrumb_name == "Niper-admin"){
   echo "<style> #Niper-admin{ background: #212529; border-radius: 10px; } #Niper-admin a{ color: #ffffff; } </style>";
 }
+*/
 if ( isset($_SESSION['admin_logged_in']) ) : ?>
   <div class="sideBar">
     <div id="ContentPlaceHolder1_UserLeftMiddleMenu1_LeftMenu" class="rightMenu" style="background: #212529">

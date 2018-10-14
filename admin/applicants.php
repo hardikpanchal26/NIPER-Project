@@ -55,7 +55,7 @@ $internal_applicants = $conn->query( "SELECT * FROM `internal_applicants`" );
                 <td><?= $internal_applicant['message']; ?></td>
                 <td><?= $internal_applicant['timestamp']; ?></td>
                 <td><?php if ($internal_applicant['status'] == 1) 
-                      echo '<button class="btn btn-sm btn-info p-2" style="width:50%"><i class="fa fa-check"></i></button><button class="btn btn-sm btn-secondary p-2" style="width:50%"><i class="fa fa-close"></i></button>'; 
+                      echo '<button class="btn btn-sm btn-info" style="width:100%">Accept</button><button class="btn btn-sm btn-secondary mt-1" style="width:100%">Reject</button>'; 
                       else if ( $internal_applicant['status'] == 2)
                       echo '<button class="btn btn-danger btn-sm" style="width:100%">Rejected</button>';
                       else if ( $internal_applicant['status'] == 3)
