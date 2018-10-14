@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2018 at 07:02 PM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.0.31
+-- Generation Time: Oct 14, 2018 at 07:59 AM
+-- Server version: 10.1.31-MariaDB
+-- PHP Version: 7.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -42,7 +42,9 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `username`, `password`, `name`, `email`, `role`) VALUES
-(1, 'admin', 'admin', 'admin', 'admin@admin.com', 'admin');
+(1, 'admin', '$2y$10$DVZlzdUQ3x2bjrmCfRZ/CeeVCu00jv0FOeMPp1WS53PuNCsRwtVnW', 'admin', 'admin@admin.com', 'admin'),
+(2, 'hardik', '$2y$10$DVZlzdUQ3x2bjrmCfRZ/CeeVCu00jv0FOeMPp1WS53PuNCsRwtVnW', 'Hardik', 'hardik@gmail.com', 'admin'),
+(3, 'priyanshu', '$2y$10$DVZlzdUQ3x2bjrmCfRZ/CeeVCu00jv0FOeMPp1WS53PuNCsRwtVnW', 'Priyanshu', 'priyanshu@gmail.com', 'admin');
 
 -- --------------------------------------------------------
 
@@ -70,25 +72,25 @@ INSERT INTO `facilities` (`id`, `instrument_id`, `facility`, `industry_charge`, 
 (4, 1, 'HRMS-MS', 10000, 5000, 'per mode'),
 (5, 2, 'Qualitative Analysis', 3500, 1750, 'per run'),
 (6, 2, 'Qualitative Analysis', 1500, 750, 'per run'),
-(7, 3, 'Standard', 1500, 750, 'per sample'),
-(8, 4, 'Standard', 1500, 750, 'per sample'),
-(9, 5, 'Standard', 7000, 3500, 'per run'),
-(10, 6, 'Standard', 3000, 1500, 'per sample'),
+(7, 3, 'Standard Tests', 1500, 750, 'per sample'),
+(8, 4, 'Standard Tests', 1500, 750, 'per sample'),
+(9, 5, 'Standard Tests', 7000, 3500, 'per run'),
+(10, 6, 'Standard Tests', 3000, 1500, 'per sample'),
 (11, 7, 'Specific Optical Rotation for each Wavelength', 3000, 1500, 'per Spectrum'),
 (12, 7, 'Optical Rotation for each Wavelength', 2000, 1000, 'per Spectrum'),
-(13, 8, 'Standard', 4000, 2000, 'per hour of Instrument time'),
-(14, 9, 'Standard', 4000, 2000, 'per hour of Instrument time'),
-(15, 10, 'Standard', 5500, 2750, 'per sample'),
-(16, 11, 'Standard', 1500, 750, 'Per sample With Cyber green Dye'),
-(18, 11, 'Standard', 3000, 1500, 'Per sample With Taqman Dye'),
-(19, 12, 'Standard', 2000, 1000, 'per sample'),
-(20, 13, 'Full spectra', 1500, 750, 'per sample'),
-(21, 13, 'Peltier kinetics', 7000, 3500, 'per hour'),
-(22, 14, 'Standard', 6000, 3000, 'per sample'),
-(23, 15, 'For analysis', 1000, 500, 'per sample'),
-(24, 15, 'For Sorting (Excluding Reagents and Consumables For Each Sample)', 5000, 2500, 'per hour'),
-(25, 16, 'Live Cell Imaging', 7000, 3500, 'per sample'),
-(26, 16, 'Fixed Sample cell', 4500, 2250, 'per sample');
+(13, 8, 'Standard Tests', 4000, 2000, 'per hour of Instrument time'),
+(14, 9, 'Standard Tests', 4000, 2000, 'per hour of Instrument time'),
+(15, 10, 'Standard Tests', 5500, 2750, 'per sample'),
+(16, 11, 'Standard Tests with Cyber green Dye', 1500, 750, 'per sample'),
+(17, 11, 'Standard Tests with Taqman Dye', 3000, 1500, 'per sample'),
+(18, 12, 'Standard Tests', 2000, 1000, 'per sample'),
+(19, 13, 'Full spectra', 1500, 750, 'per sample'),
+(20, 13, 'Peltier kinetics', 7000, 3500, 'per hour'),
+(21, 14, 'Standard Tests', 6000, 3000, 'per sample'),
+(22, 15, 'For analysis', 1000, 500, 'per sample'),
+(23, 15, 'For Sorting (Excluding Reagents and Consumables For Each Sample)', 5000, 2500, 'per hour'),
+(24, 16, 'Live Cell Imaging', 7000, 3500, 'per sample'),
+(25, 16, 'Fixed Sample cell', 4500, 2250, 'per sample');
 
 -- --------------------------------------------------------
 
@@ -144,7 +146,42 @@ INSERT INTO `instruments` (`id`, `instrument`, `admin_id`) VALUES
 (35, 'ELECTRO SPINNING SETUP', 1),
 (36, 'USP Dissolution Apperatus-IV', 1),
 (37, 'ATC FACILITY INCLUDES', 1),
-(38, 'ANIMAL HOUSE FACILITY INCLUDES', 1);
+(38, 'ANIMAL HOUSE FACILITY INCLUDES', 1),
+(39, 'FLASH CHROMATOGRAPHY', 1),
+(40, 'Hey', 1),
+(46, 'MY', 1),
+(47, 'MY', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `internal_applicants`
+--
+
+CREATE TABLE `internal_applicants` (
+  `id` int(11) NOT NULL,
+  `name` varchar(80) NOT NULL,
+  `id_number` varchar(80) NOT NULL,
+  `email` varchar(80) NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `facility_id` int(11) NOT NULL,
+  `message` longtext NOT NULL,
+  `nos` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `internal_applicants`
+--
+
+INSERT INTO `internal_applicants` (`id`, `name`, `id_number`, `email`, `contact`, `facility_id`, `message`, `nos`, `timestamp`, `status`) VALUES
+(1, 'abc', '101', 'abc@gmail.com', '1234567890', 1, '', 2, '2018-10-08 04:00:00', 1),
+(2, 'pqr', '102', 'pqr@gmail.com', '9876543210', 2, '', 1, '2018-10-08 10:45:37', 2),
+(3, 'xyz', '103', 'xyz@gmail.com', '4567891230', 3, '', 2, '2018-10-08 10:56:45', 4),
+(4, 'lmo', '104', 'lmo@gmail.com', '1234567890', 4, '', 6, '2018-10-08 04:00:22', 1),
+(5, 'def', '105', 'def@gmail.com', '1234567890', 5, '', 2, '2018-10-08 10:56:42', 3),
+(8, 'xyz', '106', 'xyz@gmail.com', '9998999988', 6, '', 2, '2018-10-08 04:52:02', 1);
 
 --
 -- Indexes for dumped tables
@@ -171,6 +208,12 @@ ALTER TABLE `instruments`
   ADD KEY `admin_id` (`admin_id`);
 
 --
+-- Indexes for table `internal_applicants`
+--
+ALTER TABLE `internal_applicants`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -178,19 +221,25 @@ ALTER TABLE `instruments`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `facilities`
 --
 ALTER TABLE `facilities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `instruments`
 --
 ALTER TABLE `instruments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT for table `internal_applicants`
+--
+ALTER TABLE `internal_applicants`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
