@@ -256,12 +256,12 @@ if (isset($_POST['application_complete']) ) {
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username = 'hardikpanchal551@gmail.com';                 // SMTP username
-    $mail->Password = 'Borntopper@799062';                           // SMTP password
+    $mail->Username = 'cif.niperahm@gmail.com';                 // SMTP username
+    $mail->Password = 'Niper#project';                           // SMTP password
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587;                                    // TCP port to connect to
 
-    $mail->setFrom('hardikpanchal551@gmail.com', 'NIPER Ahmedabad');
+    $mail->setFrom('cif.niperahm@gmail.com', 'NIPER Ahmedabad');
     $mail->addAddress($_POST['email']);
 
     $file_name = 'Reports/'.$_FILES["file"]["name"];
