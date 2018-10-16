@@ -8,7 +8,7 @@
       if ( isset( $_SESSION['invalid'] ) ) 
         echo '<div align="center"><div class="alert alert-danger pr-5 pl-5" style="width: 400px;" align="center">Invalid Username or Password</div></div>'; 
       unset($_SESSION['invalid']);  
-    ?>
+    ?> 
       
     <div class="row justify-content-center pb-3" >
 

@@ -3,31 +3,26 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
 ?>
 
 <div class="leftContent">
-  <?php
-    if ( isset( $_SESSION['instrument_added'] ) && $_SESSION['instrument_added'] != FALSE )
-      echo '<div class="alert alert-success pr-5 pl-5" style="width: 1000px;">New Instrument <b>'. $_SESSION['instrument_added'] .'</b> Added</div>';
-    else if ( isset( $_SESSION['instrument_added'] ) && $_SESSION['instrument_added'] == FALSE )
-      echo '<div class="alert alert-danger pr-5 pl-5" style="width: 1000px;">Server is down. Try Again Later.</div>';
-    unset( $_SESSION['instrument_added'] );
-
-    if ( isset( $_SESSION['facility_added'] ) && $_SESSION['facility_added'] != FALSE )
-      echo '<div class="alert alert-success pr-5 pl-5" style="width: 1000px;">New Facility <b>'. $_SESSION['facility_added'] .'</b> Added</div>';
-    else if ( isset( $_SESSION['facility_added'] ) && $_SESSION['facility_added'] == FALSE )
-      echo '<div class="alert alert-danger pr-5 pl-5" style="width: 1000px;">Server is down. Try Again Later.</div>';
-    unset( $_SESSION['facility_added'] );
-
-    $instruments = $conn->query( "SELECT * FROM `instruments`" );
-  ?>
-
-
+  
   <div class="row justify-content-center" >
-    <div class="pr-5 pl-5" style="border:2px solid #f2f2f2; width: 1000px; background: #f2f2f2">
-      <form method="POST" action="database/admin_data.php">
+    <?php
+    if ( isset( $_SESSION['niper_personnel_application'] ) ) {
+      if($_SESSION['niper_personnel_application'] == 'success')
+        echo '<div class="alert alert-success pr-5 pl-5" style="width: 1000px;">Application Successfully Submitted</div>';
+      else 
+        echo '<div class="alert alert-danger pr-5 pl-5" style="width: 1000px;">Server is down. Try Again Later.</div>';
+      unset( $_SESSION['niper_personnel_application'] );
+    }
+    
+    $instruments = $conn->query( "SELECT * FROM `instruments`" );
+    ?>
+    <div class="px-5 px-add" style="border:2px solid #f2f2f2; width: 1000px; background: #f2f2f2">
+      <form method="POST" action="../database/admin_data.php" id="niper_personnel_form" onsubmit="return validate_niper_personnel()">
         <h3 align="center" class="mb-4 mt-4">Instrumentation Facility Form for NIPER Personnel</h3>
         <br>
 
         <div class="row mb-2 justify-content-center">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="input-group mb-4">
               <div class="input-group-prepend">
                 <span class="input-group-text" ><i class="fa fa-user"></i></span>
@@ -38,7 +33,7 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
         </div>
 
         <div class="row mb-2 justify-content-center">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="input-group mb-4">
               <div class="input-group-prepend">
                 <span class="input-group-text" ><i class="fa fa-id-card"></i></span>
@@ -49,7 +44,7 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
         </div>
 
         <div class="row mb-2 justify-content-center">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="input-group mb-4">
               <div class="input-group-prepend">
                 <span class="input-group-text" ><i class="fa fa-envelope"></i></span>
@@ -60,7 +55,7 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
         </div>
 
         <div class="row mb-2 justify-content-center">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="input-group mb-4">
               <div class="input-group-prepend">
                 <span class="input-group-text" ><i class="fa fa-phone"></i></span>
@@ -71,7 +66,7 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
         </div>
 
         <div class="row mb-2 justify-content-center">
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="input-group mb-4">
               <div class="input-group-prepend">
                 <span class="input-group-text" ><i class="fa fa-wrench"></i></span>
@@ -89,7 +84,7 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="input-group mb-4">
               <div class="input-group-prepend">
                 <span class="input-group-text" ><i class="fa fa-flask"></i></span>
@@ -102,7 +97,7 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
         </div>
 
         <div class="row mb-2 justify-content-center">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="input-group mb-4">
               <div class="input-group-prepend">
                 <span class="input-group-text" ><i class="fa fa-envelope-open"></i></span>
@@ -113,7 +108,7 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
         </div>
 
         <div class="row mb-2 justify-content-center">
-          <div class="col-md-2">
+          <div class="col-md-4">
             <label>No. of Samples</label>
             <div class="input-group mb-4">
               <div class="input-group-prepend">
@@ -123,20 +118,19 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
             </div>
           </div>
 
-          <div class="col-md-6" align="center">
+          <div class="col-md-8">
             <label>Charges (₹)</label><br>
-            <button type="text" class="btn btn-info" name="charge"  style="width: 100%">NA for Niper Personnel</button>
+            <button type="button" class="btn btn-info" name="charge"  style="width: 100%">NA for Niper Personnel</button>
           </div>
         </div>
 
         <div class="row mb-2 justify-content-center">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="input-group mb-5">
                 <input type="submit" class="form-control btn btn-primary" value="Submit" name="niper_personnel" id="niper_personnel"> 
             </div>
           </div>
         </div>
-
       </form>
     </div>
   </div>

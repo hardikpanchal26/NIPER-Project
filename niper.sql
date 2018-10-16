@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2018 at 07:59 AM
+-- Generation Time: Oct 16, 2018 at 09:14 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -42,7 +42,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `username`, `password`, `name`, `email`, `role`) VALUES
-(1, 'admin', '$2y$10$DVZlzdUQ3x2bjrmCfRZ/CeeVCu00jv0FOeMPp1WS53PuNCsRwtVnW', 'admin', 'admin@admin.com', 'admin'),
+(1, 'admin', '$2y$10$.ZGDWHcMIU7oQoteeBBMCeBQHoOHnrleRESOj4dch//vrzPYRyzXS', 'admin', 'admin@admin.com', 'admin'),
 (2, 'hardik', '$2y$10$DVZlzdUQ3x2bjrmCfRZ/CeeVCu00jv0FOeMPp1WS53PuNCsRwtVnW', 'Hardik', 'hardik@gmail.com', 'admin'),
 (3, 'priyanshu', '$2y$10$DVZlzdUQ3x2bjrmCfRZ/CeeVCu00jv0FOeMPp1WS53PuNCsRwtVnW', 'Priyanshu', 'priyanshu@gmail.com', 'admin');
 
@@ -168,7 +168,7 @@ CREATE TABLE `internal_applicants` (
   `message` longtext NOT NULL,
   `nos` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -176,12 +176,13 @@ CREATE TABLE `internal_applicants` (
 --
 
 INSERT INTO `internal_applicants` (`id`, `name`, `id_number`, `email`, `contact`, `facility_id`, `message`, `nos`, `timestamp`, `status`) VALUES
-(1, 'abc', '101', 'abc@gmail.com', '1234567890', 1, '', 2, '2018-10-08 04:00:00', 1),
-(2, 'pqr', '102', 'pqr@gmail.com', '9876543210', 2, '', 1, '2018-10-08 10:45:37', 2),
-(3, 'xyz', '103', 'xyz@gmail.com', '4567891230', 3, '', 2, '2018-10-08 10:56:45', 4),
-(4, 'lmo', '104', 'lmo@gmail.com', '1234567890', 4, '', 6, '2018-10-08 04:00:22', 1),
+(1, 'abc', '101', 'abc@gmail.com', '1234567890', 1, '', 2, '2018-10-15 13:46:48', 3),
+(3, 'xyz', '103', 'xyz@gmail.com', '4567891230', 3, '', 2, '2018-10-15 14:04:29', 3),
+(4, 'lmo', '104', 'lmo@gmail.com', '1234567890', 4, '', 6, '2018-10-15 14:21:39', 3),
 (5, 'def', '105', 'def@gmail.com', '1234567890', 5, '', 2, '2018-10-08 10:56:42', 3),
-(8, 'xyz', '106', 'xyz@gmail.com', '9998999988', 6, '', 2, '2018-10-08 04:52:02', 1);
+(8, 'xyz', '106', 'xyz@gmail.com', '9998999988', 6, '', 2, '2018-10-15 14:39:18', 3),
+(10, '12313', '231231', 'haahaha', '12312', 2, 'nonnnnee', 3, '2018-10-15 14:41:28', 4),
+(14, 'Hardik', '515151', 'hardikpanchal551@gmail.com', '8181818888', 4, '', 1, '2018-10-15 18:01:07', 4);
 
 --
 -- Indexes for dumped tables
@@ -239,7 +240,7 @@ ALTER TABLE `instruments`
 -- AUTO_INCREMENT for table `internal_applicants`
 --
 ALTER TABLE `internal_applicants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables

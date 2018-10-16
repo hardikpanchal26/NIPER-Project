@@ -17,7 +17,7 @@ if($beardcrumb_name == "Instrumentlistandcharges"){
   echo "<style> #Niper-admin{ background: #212529; border-radius: 10px; } #Niper-admin a{ color: #ffffff; } </style>";
 }
 */
-if ( isset($_SESSION['admin_logged_in']) ) : ?>
+if (isset($_SESSION['admin_logged_in']) ) : ?>
   <div class="sideBar">
     <div id="ContentPlaceHolder1_UserLeftMiddleMenu1_LeftMenu" class="rightMenu" style="background: #212529">
       <h2>Admin Dashboard</h2>
