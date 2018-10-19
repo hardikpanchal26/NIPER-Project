@@ -9,7 +9,7 @@
 		        if ( isset( $_SESSION['instrument_added'] ) && $_SESSION['instrument_added'] != FALSE ) 
 		          echo '<div class="alert alert-success pr-5 pl-5" style="width: 1000px;">New Instrument <b>'. $_SESSION['instrument_added'] .'</b> Added</div>';
 		        else if ( isset( $_SESSION['instrument_added'] ) && $_SESSION['instrument_added'] == FALSE ) 
-		          echo '<div class="alert alert-danger pr-5 pl-5" style="width: 1000px;">Server is down. Try Again Later.</div>';
+		          echo '<div class="alert alert-danger pr-5 pl-5" style="width: 1000px;">Cannot add new Instrument. Instrument already added.</div>';
 		        
 		        unset($_SESSION['instrument_added']);
 
@@ -25,7 +25,7 @@
 		      ?>
 
 		      <div class="pr-5 pl-5" style="border:2px solid #f2f2f2; width: 1000px; background: #f2f2f2">
-		      <form method="POST" action="../database/admin_data.php">
+		      <form method="POST" action="../database/admin_data.php" id="add_instrument_form" onsubmit="return validate_add_instrument_form()">
 
 		        <h3 align="center" class="mb-4 mt-4">Add New Instrument</h3>
 		        <span>Add a new instrument.</span>
@@ -36,7 +36,7 @@
 		              <div class="input-group-prepend">
 		                  <span class="input-group-text" ><i class="fa fa-wrench"></i></span>
 		              </div>
-		              <input type="text" class="form-control" placeholder="Instrument" name="instrument"> 
+		              <input type="text" class="form-control" placeholder="Instrument" name="instrument" id="instrument"> 
 		            </div>
 		          </div>
 
@@ -45,7 +45,7 @@
 		              <div class="input-group-prepend">
 		                  <span class="input-group-text" ><i class="fa fa-user"></i></span>
 		              </div>
-		              <select class="custom-select form-control" name="supervisor">
+		              <select class="custom-select form-control" name="supervisor" id="supervisor">
 		                <option selected>-- Select Supervisor --</option>
 		                <?php
 		                  if ($supervisors->num_rows > 0) {
@@ -61,7 +61,7 @@
 
 		          <div class="col-md-2">
 		            <div class="input-group mb-4">
-		              <input type="submit" class="form-control btn btn-primary" name="add_instrument" value="Add">
+		              <input type="submit" class="form-control btn btn-primary" name="add_instrument" id="add_instrument" value="Add">
 		            </div>
 		          </div>
 		        </div>
@@ -73,7 +73,7 @@
 	    
 		    <div class="row justify-content-center" >
 		      <div class="pr-5 pl-5" style="border:2px solid #f2f2f2; width: 1000px; background: #f2f2f2">
-		      <form method="POST" action="../database/admin_data.php">
+		      <form method="POST" action="../database/admin_data.php" id="add_facility_form" onsubmit="return validate_add_facility_form()">
 		       <h3 align="center" class="mb-4 mt-4">Add Instrument Facilities</h3>
 		       <br>
 		       <span>Select Instrument and Add Facility.</span>  
@@ -83,7 +83,7 @@
 		            <div class="input-group-prepend">
 		                <span class="input-group-text" ><i class="fa fa-wrench"></i></span>
 		            </div>
-		            <select class="custom-select form-control" name="selected_instrument">
+		            <select class="custom-select form-control" name="selected_instrument" id="selected_instrument">
 		              <option selected>-- Select Instrument --</option>
 		              <?php
 		                if ($instruments->num_rows > 0) {
@@ -101,7 +101,7 @@
 		            <div class="input-group-prepend">
 		              <span class="input-group-text" ><i class="fa fa-flask"></i></span>
 		            </div>
-		            <input type="text" class="form-control" placeholder="Facility" name="facility"> 
+		            <input type="text" class="form-control" placeholder="Facility" name="facility" id="facility"> 
 		          </div>
 		        </div>
 		      </div>
@@ -114,7 +114,7 @@
 		            <div class="input-group-prepend">
 		              <span class="input-group-text" ><i class="fa fa-rupee"></i></span>
 		             </div>
-		            <input type="text" class="form-control" placeholder="Charge for Insdustry" name="charge_for_industry">
+		            <input type="text" class="form-control" placeholder="Charge for Insdustry" name="charge_for_industry" id="charge_for_industry">
 		          </div>
 		        </div>
 		        
@@ -123,7 +123,7 @@
 		            <div class="input-group-prepend">
 		              <span class="input-group-text" ><i class="fa fa-rupee"></i></span>
 		            </div>
-		            <input type="text" class="form-control" placeholder="Charge for Institutes (Govt. and Private)" name="charge_for_institute"> 
+		            <input type="text" class="form-control" placeholder="Charge for Institutes (Govt. and Private)" name="charge_for_institute" id="charge_for_institute"> 
 		           </div>
 		        </div>
 		      </div>
@@ -135,13 +135,13 @@
 		            <div class="input-group-prepend">
 		              <span class="input-group-text" >Remarks</span>
 		            </div>
-		            <input type="text" class="form-control" name="remarks">
+		            <input type="text" class="form-control" name="remarks" id="remarks">
 		          </div>
 		        </div>
 
 		        <div class="col-md-6">
 		          <div class="input-group mb-5">
-		              <input type="submit" class="form-control btn btn-primary" value="Add" name="add_facility"> 
+		              <input type="submit" class="form-control btn btn-primary" value="Add" name="add_facility" id="add_facility"> 
 		          </div>
 		        </div>
 		      </div>

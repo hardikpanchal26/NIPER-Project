@@ -1,9 +1,5 @@
 <html>  
 	<head>
-	    <meta charset="UTF-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 	    <title> Central Instrumentation Facility - NIPER Ahmedabad </title>
 	</head>
 	<style>
@@ -28,8 +24,8 @@
 	    }
 
 	    .loader li {
-	    	font-family: 'Nunito', sans-serif;
-	        color: #ffffff;
+	    	font-family: 'Open Sans', sans-serif;
+	        color: #ffffff !important;
 	        font-size: 1em;
 	        padding: 5px;
 	        text-align: center;
@@ -109,6 +105,22 @@
 <?php 
 session_start();
 require 'config.php';
+include 'PHPMailer/PHPMailerAutoload.php';
+
+    $mail = new PHPMailer;
+
+    //$mail->SMPTDebug = 4;
+
+    $mail->isSMTP();                                      // Set mailer to use SMTP
+    $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+    $mail->Username = 'cif.niperahm@gmail.com';                 // SMTP username
+    $mail->Password = 'Niper#project';                           // SMTP password
+    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+    $mail->Port = 587;                                    // TCP port to connect to
+    $mail->setFrom('cif.niperahm@gmail.com', 'NIPER Ahmedabad');
+    
+
 
 if (isset($_POST['admin_login']) ) {
 
@@ -212,7 +224,26 @@ if (isset($_POST['niper_personnel']) ) {
     $sql = "INSERT INTO `internal_applicants` (`id`, `name`, `id_number`, `email`, `contact`, `facility_id`, `message`, `nos`, `timestamp`, `status`) VALUES (NULL, '$name', '$enroll_no', '$email', '$contact', '$facility', '$message', '$no_of_samples', CURRENT_TIMESTAMP, '1')";
 
     if ($conn->query($sql) ) {
-        $_SESSION['niper_personnel_application'] = 'success';
+        $last_id = $conn->insert_id;
+
+            //----------------------------------------------------------------------------------------------------//
+        $mail->addAddress($email);
+
+        $mail->isHTML(true);                  // Set email format to HTML
+
+        $mail->Subject = "CIF NIPER Ahmedabad";
+        $mail->Body    = '<p>Dear, '.$applicant_name.'</p><p>Your Application for using NIPER Ahmedabad Central Instrumentation Facility has been sucessfully received. Your Application ID is <b>'.$last_id.'</b>. You may check status of your application through NIPER CIF Portal using provided Application ID.</p><p>Regards,<br>Central Instrumentation Facility Department,<br>NIPER Ahmedabad<p>';
+        
+        if (!$mail->send()) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            echo 'Message has been sent';
+        }
+        //----------------------------------------------------------------------------------------------------//
+
+        $_SESSION['niper_personnel_application'] = $last_id;
+
     } else {
         $_SESSION['niper_personnel_application'] = 'fail';
     }
@@ -228,12 +259,7 @@ if (isset($_POST['application_accept']) ) {
     echo "<script type='text/javascript'> document.location = '../admin/applicants.php'; </script>";
 }
 
-if (isset($_POST['application_reject']) ) {
-    $current_applicant_id = $_POST['niper_personnel_id'];
-    $sql = "UPDATE `internal_applicants` SET `status` = '2' WHERE `internal_applicants`.`id` = '$current_applicant_id'";
-    $conn->query($sql);
-    echo "<script type='text/javascript'> document.location = '../admin/applicants.php'; </script>";
-}
+
 
 
 if (isset($_POST['application_delete']) ) {
@@ -247,21 +273,8 @@ if (isset($_POST['application_complete']) ) {
     
     $current_applicant_id = $_POST['niper_personnel_id'];
     $applicant_name = $conn->query("SELECT `name` FROM `internal_applicants` WHERE `id` = '$current_applicant_id'")->fetch_object()->name;
-    include 'PHPMailer/PHPMailerAutoload.php';
-
-    $mail = new PHPMailer;
-
-    //$mail->SMPTDebug = 4;
-
-    $mail->isSMTP();                                      // Set mailer to use SMTP
-    $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-    $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username = 'cif.niperahm@gmail.com';                 // SMTP username
-    $mail->Password = 'Niper#project';                           // SMTP password
-    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-    $mail->Port = 587;                                    // TCP port to connect to
-
-    $mail->setFrom('cif.niperahm@gmail.com', 'NIPER Ahmedabad');
+    
+    //----------------------------------------------------------------------------------------------------//
     $mail->addAddress($_POST['email']);
 
     $file_name = 'Reports/'.$_FILES["file"]["name"];
@@ -279,16 +292,38 @@ if (isset($_POST['application_complete']) ) {
     } else {
         echo 'Message has been sent';
     }
+    //----------------------------------------------------------------------------------------------------//
 
     $sql = "UPDATE `internal_applicants` SET `status` = '3' WHERE `internal_applicants`.`id` = '$current_applicant_id'";
     $conn->query($sql);
 
     echo "<script type='text/javascript'> document.location = '../admin/applicants.php'; </script>";
+}
 
+if (isset($_POST['application_reject']) ) {
+    $current_applicant_id = $_POST['niper_personnel_id'];
+    $applicant_name = $conn->query("SELECT `name` FROM `internal_applicants` WHERE `id` = '$current_applicant_id'")->fetch_object()->name;
+    
+    //----------------------------------------------------------------------------------------------------//
+    $mail->addAddress($_POST['email']);
+
+    $mail->isHTML(true);                  // Set email format to HTML
+
+    $mail->Subject = "CIF Report from NIPER Ahmedabad";
+    $mail->Body    = '<p>Dear, '.$applicant_name.'</p><p>'.$_POST['message-body'].'</p><p>Regards,<br>Central Instrumentation Facility Department,<br>NIPER Ahmedabad<p>';
+    
+    if (!$mail->send()) {
+        echo 'Message could not be sent.';
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
+    } else {
+        echo 'Message has been sent';
+    }
+    $sql = "UPDATE `internal_applicants` SET `status` = '2' WHERE `internal_applicants`.`id` = '$current_applicant_id'";
+    $conn->query($sql);
+    echo "<script type='text/javascript'> document.location = '../admin/applicants.php'; </script>";
 }
 
 if (isset($_POST['check_status']) ) {
-
     $email = $_POST['email'];
     $application_id = $_POST['application_id'];
 

@@ -7,8 +7,8 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
   <div class="row justify-content-center" >
     <?php
     if ( isset( $_SESSION['niper_personnel_application'] ) ) {
-      if($_SESSION['niper_personnel_application'] == 'success')
-        echo '<div class="alert alert-success pr-5 pl-5" style="width: 1000px;">Application Successfully Submitted</div>';
+      if($_SESSION['niper_personnel_application'] != 'fail')
+        echo '<div class="alert alert-success pr-5 pl-5" style="width: 1000px;">Application Successfully Submitted. Application ID is <b>'.$_SESSION['niper_personnel_application'].'</b></div>';
       else 
         echo '<div class="alert alert-danger pr-5 pl-5" style="width: 1000px;">Server is down. Try Again Later.</div>';
       unset( $_SESSION['niper_personnel_application'] );

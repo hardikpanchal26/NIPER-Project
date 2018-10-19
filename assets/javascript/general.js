@@ -171,7 +171,7 @@ function validate_niper_personnel() {
 	
 	var name_test    = /^[A-Za-z\s]+$/;
 	var id_num_test  = /^[A-Za-z0-9]+$/;
-	var email_test   = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	var email_test   = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.){1,2}([a-zA-Z0-9]{2,4})+$/;
 	var contact_test = /^[0-9\s]+$/;
 	
 	if (!name_test.test(name)) {
@@ -249,7 +249,7 @@ function validate_check_status() {
     $('#check_internal_status_form #show_status').blur();
 	
 	var application_id_test  = /^[0-9]+$/;
-	var email_test   = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	var email_test   = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.){1,2}([a-zA-Z0-9]{2,4})+$/;
 	
 	
 	if (!email_test.test(email)) {
@@ -274,6 +274,103 @@ function validate_check_status() {
 	return true;
 }
 
+function validate_add_instrument_form() {
+	var instrument = $('#add_instrument_form #instrument').val();
+	var supervisor = $('#add_instrument_form #supervisor').val();
+	
+    $('#add_instrument_form #add_instrument').blur();
+	//alert(instrument + " " + supervisor);
+	
+	var instrument_test    = /^.+$/;
+	var supervisor_test  = '-- Select Supervisor --';
+	
+	if (!instrument_test.test(instrument)) {
+		alert("Please Enter An Instrument");
+		$('#add_instrument_form #instrument').focus();
+		$('html, body').animate({
+            scrollTop: $("#add_instrument_form #instrument").offset().top - 300
+        }, 400);	
+		return false;
+	}
+
+	if (supervisor == supervisor_test) {
+		alert("Please Select a Supervisor");
+		$('#add_instrument_form #supervisor').focus();
+		$('html, body').animate({
+            scrollTop: $("#add_instrument_form #supervisor").offset().top - 300
+        }, 400);	
+		return false;
+	}
+
+	$('.loader-bg').show();
+	return true;
+}
+
+function validate_add_facility_form() {
+	var selected_instrument = $('#add_facility_form #selected_instrument').val();
+	var facility = $('#add_facility_form #facility').val();
+	var charge_for_industry = $('#add_facility_form #charge_for_industry').val();
+	var charge_for_institute = $('#add_facility_form #charge_for_institute').val();
+	var remarks = $('#add_facility_form #remarks').val();
+	
+    $('#add_facility_form #add_facility').blur();
+	//alert(selected_instrument + " " + facility + " " + charge_for_industry + " " + charge_for_institute + " " + remarks);
+	
+	var selected_instrument_test  = '-- Select Instrument --';
+	var facility_test             = /^.+$/;
+	var charge_for_industry_test  = /^[0-9]+$/;
+	var charge_for_institute_test = /^[0-9]+$/;
+	var remarks_test              = /^.+$/;
+
+	if (selected_instrument == selected_instrument_test) {
+		alert("Please Select an Instrument");
+		$('#add_facility_form #selected_instrument').focus();
+		$('html, body').animate({
+            scrollTop: $('#add_facility_form #selected_instrument').offset().top - 300
+        }, 400);	
+		return false;
+	}
+
+	if (!facility_test.test(facility)) {
+		alert("Please Enter a Facility");
+		$('#add_facility_form #facility').focus();
+		$('html, body').animate({
+            scrollTop: $("#add_facility_form #facility").offset().top - 300
+        }, 400);	
+		return false;
+	}
+
+	if (!charge_for_industry_test.test(charge_for_industry)) {
+		alert("Please Enter Valid Charge for Industry");
+		$('#add_facility_form #charge_for_industry').focus();
+		$('html, body').animate({
+            scrollTop: $("#add_facility_form #charge_for_industry").offset().top - 300
+        }, 400);	
+		return false;
+	}
+
+	if (!charge_for_institute_test.test(charge_for_institute)) {
+		alert("Please Enter Valid Charge for Institute");
+		$('#add_facility_form #charge_for_institute').focus();
+		$('html, body').animate({
+            scrollTop: $("#add_facility_form #charge_for_institute").offset().top - 300
+        }, 400);	
+		return false;
+	}
+
+	if (!remarks_test.test(remarks)) {
+		alert("Remarks should not be empty");
+		$('#add_facility_form #remarks').focus();
+		$('html, body').animate({
+            scrollTop: $("#add_facility_form #remarks").offset().top - 300
+        }, 400);	
+		return false;
+	}
+
+	$('.loader-bg').show();
+	return true;
+}
+
 function applicants_data_submit(id) {
 	$('#niper_personnel_id').val(id);
 	$('#applicants_data_form').submit();
@@ -282,6 +379,11 @@ function applicants_data_submit(id) {
 function send_mail_loader_load() {
 	$('#send_mail_form').hide();
 	$('#send_mail_loader').show();
+}
+
+function send_mail_loader_load_2() {
+	$('#send_mail_form_2').hide();
+	$('#send_mail_loader_2').show();
 }
 
 function passwords_not_match() {

@@ -94,8 +94,10 @@ function enter_nos() {
                 var index_id = $(this).closest('tr').attr('id');
                 if( $('#'+index_id + ' .the_unit').val() < 0 || $('#'+index_id + ' .the_unit').val() >50 || $('#'+index_id + ' .the_unit').val() == '') {
                   alert("Please Enter Unit Value between 0 to 50"); 
-                  $(this).attr('checked', false);
                   $('#'+index_id + ' .the_unit').val(1);
+                  
+                  $.calculate_basic_charge(index_id);
+                  $.calculate_gst_and_total();
                   return;
                 }
                 $.calculate_basic_charge(index_id);    

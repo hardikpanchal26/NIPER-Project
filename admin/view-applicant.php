@@ -78,13 +78,13 @@
                   <?php 
                     if ($internal_applicants['status'] == 1)
                       echo '<div class="col-md-6"><input type="submit" name="application_accept" class="btn btn-success w-100" value="Accept"></div>
-                        <div class="col-md-6"><input type="submit" name="application_reject" class="btn btn-danger w-100"  value="Reject"></div>';
+                        <div class="col-md-6"><button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#reject_reason">Reject</button></div>';
                     else if ($internal_applicants['status'] == 2)
                       echo '<div class="col-md-12"><input type="submit" name="application_delete" class="btn btn-danger w-100" value="Delete"></div>';
                     else if ($internal_applicants['status'] == 3)
                       echo '';
                     else
-                      echo '<div class="col-md-12"><button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#send_report">Send Report and Complete</button</div>';
+                      echo '<div class="col-md-6"><button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#send_report">Send Report</button></div><div class="col-md-6"><button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#reject_reason">Reject</button></div>';
                   ?>
               </div>
             </form>
@@ -114,6 +114,10 @@
                       <div class="form-group mb-4">
                         <input type="file" name="file" class="form-control" style="height:auto">
                       </div>
+                      <div class="form-group mb-4" align="center">
+                        <input type="checkbox" name="complete_report" class="form-control pl-2" checked="true" style="display: inline-block; width: 20px; height: 20px; cursor: pointer;">
+                        <label class="pl-1">Change Status to <span class="badge badge-success p-2 ml-1">Complete</span></label>
+                      </div>
                       <input type="submit" class="btn btn-primary w-100 mb-4" name="application_complete" value="Send Report">
                     </form>
                   </div>
@@ -124,6 +128,53 @@
                   
                 </div>
                 <div id="send_mail_loader" class="modal-content" align="center" style="color:#102d53; min-height: 500px; display: none;">
+                  
+                  <div style="margin-top: 200px"><i class="fa fa-spinner fa-spin" style="font-size:48px"></i></div>
+                  
+                  <div class="mt-3 mb-2">S E N D I N G  &nbsp; M A I L ...</div>
+                  <div>Please be patient. It may take a while.</div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="modal" id="reject_reason">
+              <div class="modal-dialog">
+                
+                <div id="send_mail_form_2" class="modal-content">
+                
+                  <div class="modal-header">
+                    <h4 class="modal-title">State Reason For Rejection</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  
+                  <div class="modal-body">
+                    <form action="../database/admin_data.php" method="POST" enctype="multipart/form-data" onsubmit="send_mail_loader_load_2()">
+
+                      <input type="hidden" name="niper_personnel_id" value="<?= $internal_applicants['id'] ?>">
+                      <div class="form-group mt-4 mb-4">
+                        <label>Send Email to: </label>
+                        <input type="text" class="form-control" name="email" value="<?= $internal_applicants['email'] ?>" placeholder="Recipient's Email">
+                      </div>
+                      <div class="form-group mb-5">
+                        <textarea class="form-control" name="message-body" placeholder="Message Body" rows="4">Your application for your CIF Test at NIPER Ahmedabad for the Application ID <?= $internal_applicants['id'] ?> has been rejected because of inappropriate filling of form. Please try again.
+                        </textarea>
+                      </div>
+                      <!--
+                      <div class="form-group mb-4">
+                        <input type="file" name="file" class="form-control" style="height:auto">
+                      </div>
+                    -->
+                      <input type="submit" class="btn btn-danger w-100 mb-4" name="application_reject" value="Reject Application">
+                    </form>
+                  </div>
+                  
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  </div>
+                  
+                </div>
+                <div id="send_mail_loader_2" class="modal-content" align="center" style="color:#102d53; min-height: 500px; display: none;">
                   
                   <div style="margin-top: 200px"><i class="fa fa-spinner fa-spin" style="font-size:48px"></i></div>
                   
