@@ -47,7 +47,7 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
               <div class="input-group-prepend">
                 <span class="input-group-text" ><i class="fa fa-map-marker"></i></span>
                </div>
-              <textarea class="form-control" placeholder="Industry Address" name="address"></textarea>
+              <textarea class="form-control" placeholder="Address" name="address"></textarea>
             </div>
           </div>
       </div>
@@ -58,7 +58,7 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
               <div class="input-group-prepend">
                 <span class="input-group-text" ><i class="fa fa-user"></i></span>
                </div>
-              <input type="text" class="form-control" placeholder="Authorized Person Name" name="name">
+              <input type="text" class="form-control" placeholder="Your Name" name="name">
             </div>
           </div>
       </div>
