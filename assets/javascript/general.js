@@ -172,7 +172,7 @@ function validate_niper_personnel() {
 	var name_test    = /^[A-Za-z\s]+$/;
 	var id_num_test  = /^[A-Za-z0-9]+$/;
 	var email_test   = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.){1,2}([a-zA-Z0-9]{2,4})+$/;
-	var contact_test = /^[0-9\s]+$/;
+	var contact_test = /^[0-9\s]{7,12}$/;
 	
 	if (!name_test.test(name)) {
 		alert("Please Enter your Full Name Correctly");
@@ -405,4 +405,20 @@ function passwords_match() {
 	else {
 		$('#passwords_confirmed').hide();
 	}
+}
+
+function submit_facility_avaibility_form(id) {
+	
+	var instrument_available = $('#'+id).is(':checked');
+	var facility_id = id.split('_')[1];
+	var new_status = (instrument_available)? 1 : 0;
+	
+	$.ajax({
+    	type:'POST',
+        url:'../database/ajax_data.php',
+        data: {facility_status_change_id: facility_id, status: new_status },
+        success:function(html){
+        }
+
+    });
 }

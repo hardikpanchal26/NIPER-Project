@@ -44,7 +44,7 @@
 <?php
   
   if( isset($_SESSION ['admin_logged_in']) ) {
-    echo "<script type='text/javascript'> document.location = 'admin_dashboard.php'; </script>";
+    echo "<script type='text/javascript'> document.location = 'admin-dashboard.php'; </script>";
   }
 ?>  
 

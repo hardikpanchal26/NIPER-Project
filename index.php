@@ -17,5 +17,5 @@
 * ...
 */
 
- header('location: users/instrumentlistandcharges.php');
+ header('location: users/instrument-list-and-charges.php');
 ?>

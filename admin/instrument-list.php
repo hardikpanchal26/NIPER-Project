@@ -18,11 +18,11 @@
               <th style="vertical-align: middle;">Charges for Industries</th>
               <th style="vertical-align: middle;">Charges for Institues</th>
               <th style="vertical-align: middle;">Remarks</th>
+              <th style="vertical-align: middle;">Facility Availability</th>
             </tr>
           </thead>
           
           <tbody>
-            
             <?php
               $index = 1;
               if ($instruments->num_rows > 0) {
@@ -40,16 +40,20 @@
                       <td><?= $row_inner['industry_charge']; ?><br></td>
                       <td><?= $row_inner['institute_charge']; ?><br></td>
                       <td><?= $row_inner['remark']; ?><br></td>
+                      <td align="center">
+                          <label class="switch">
+                              <input type="hidden" name="facility_id" value="<?= $row_inner['id'] ?>">
+                              <input type="checkbox" name="availability" id="availability_<?= $row_inner['id'] ?>" <?php if($row_inner['availability'] == 1) echo 'checked="checked"'; else echo "";?> onchange="submit_facility_avaibility_form(id)">
+                            <span class="slider round"></span>
+                          </label>
+                      </td>
                     </tr>
-
                     <?php endwhile; 
                   }
                 }
               }
             ?>    
           </tbody>
-        
-
         </table>
       </div>
     

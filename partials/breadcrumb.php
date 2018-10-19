@@ -1,18 +1,7 @@
 <?php
   $url_beardcrumb_name = basename($_SERVER['REQUEST_URI']);
-  $name_string = explode(".", $url_beardcrumb_name);
-  $beardcrumb_name = ucfirst($name_string[0]);
-  if($beardcrumb_name == "Instrumentlistandcharges"){
-    $beardcrumb_name = "Instrument List and Charges";
-  } elseif($beardcrumb_name == "Niper_personnel") {
-    $beardcrumb_name = "Niper Personnel";
-  } elseif($beardcrumb_name == "Institutes_govt_and_private"){
-    $beardcrumb_name = "Institutes (Govt. and Private)";
-  } elseif($beardcrumb_name == "Check_status"){
-    $beardcrumb_name = "Check Status";
-  } elseif($beardcrumb_name == "Niper-admin"){
-    $beardcrumb_name = "Niper Admin";
-  }
+  $beardcrumb_name = ucwords(str_replace("-"," ",explode(".", $url_beardcrumb_name)[0]));
+
 ?>
 <div class="breadcrumb">
   <div class="container">
@@ -42,7 +31,7 @@
         <span class="breadCurrent">
           <span class="bg">
 
-            <span id="ContentPlaceHolder1_BreadCrumbControl1_SiteMapPath1_txtlabel_2" class="currentPage"> <?php echo $beardcrumb_name; ?> </span>
+            <span id="ContentPlaceHolder1_BreadCrumbControl1_SiteMapPath1_txtlabel_2" class="currentPage"> <?= $beardcrumb_name; ?> </span>
           </span>
         </span>
       </span>

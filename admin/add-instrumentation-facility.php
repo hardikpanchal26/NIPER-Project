@@ -24,7 +24,7 @@
 		        $supervisors = $conn->query( "SELECT * FROM `admins` ");
 		      ?>
 
-		      <div class="pr-5 pl-5" style="border:2px solid #f2f2f2; width: 1000px; background: #f2f2f2">
+		    <div class="pr-5 pl-5" style="border:2px solid #f2f2f2; width: 1000px; background: #f2f2f2">
 		      <form method="POST" action="../database/admin_data.php" id="add_instrument_form" onsubmit="return validate_add_instrument_form()">
 
 		        <h3 align="center" class="mb-4 mt-4">Add New Instrument</h3>

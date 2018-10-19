@@ -75,7 +75,7 @@ $instruments = $conn->query( "SELECT * FROM `instruments`" );
           if ($instruments->num_rows > 0) {
             while($row = $instruments->fetch_assoc()) { 
               $table_instrument_id = $row['id'];
-              $facilities = $conn->query( "SELECT * FROM `facilities` WHERE `Instrument_id` = '$table_instrument_id'" );
+              $facilities = $conn->query( "SELECT * FROM `facilities` WHERE `instrument_id` = '$table_instrument_id' AND `availability` = 1" );
 
               if ($facilities->num_rows > 0) {
                 while($row_inner = $facilities->fetch_assoc()) :?> 
@@ -91,7 +91,7 @@ $instruments = $conn->query( "SELECT * FROM `instruments`" );
                           <input type="checkbox" class="the_checkbox" style="cursor: pointer;">
                         </div>
                       </div>
-                      <input type="number" data-value="0" class="the_unit form-control" value="1">
+                      <input type="number" data-value="0" pattern="[0-9]" class="the_unit form-control" value="1">
                     </div>
                   </td>
 

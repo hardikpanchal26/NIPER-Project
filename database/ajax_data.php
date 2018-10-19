@@ -18,7 +18,15 @@ if (isset($_POST['instrument_id']) ) {
 if (isset($_POST['facility_id']) ) {
     $facility_id = $_POST['facility_id'];
     $facilities  = $conn->query("SELECT * FROM `facilities` WHERE `id` = '$facility_id'");
-    
+
     $facility = $facilities->fetch_assoc();
     echo json_encode($facility);
 }
+
+if (isset($_POST['facility_status_change_id']) ) {
+    $facility_id = $_POST['facility_status_change_id'];
+    $status = $_POST['status'];
+    $conn->query("UPDATE `facilities` SET `availability` = '$status' WHERE `facilities`.`id` = '$facility_id'");
+}
+
+

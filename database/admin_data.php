@@ -133,7 +133,7 @@ if (isset($_POST['admin_login']) ) {
 
     if (password_verify($password, $db_password)) {
         $_SESSION['admin_logged_in'] = $username;
-        echo "<script type='text/javascript'> document.location = '../admin/admin_dashboard.php'; </script>";
+        echo "<script type='text/javascript'> document.location = '../admin/admin-dashboard.php'; </script>";
  
     } else { 
         $_SESSION['invalid'] = true; 
@@ -159,7 +159,7 @@ if (isset($_POST['add_instrument']) ) {
         $_SESSION['instrument_added'] = false;
     }
 
-    echo "<script type='text/javascript'> document.location = '../admin/add_instrumentation_facility.php'; </script>";
+    echo "<script type='text/javascript'> document.location = '../admin/add-instrumentation-facility.php'; </script>";
 }
 
 if (isset($_POST['reset_password']) ) {
@@ -184,7 +184,7 @@ if (isset($_POST['reset_password']) ) {
         $_SESSION['reset_password'] = 'failed'; 
     } 
 
-    echo "<script type='text/javascript'> document.location = '../admin/reset_password.php'; </script>";
+    echo "<script type='text/javascript'> document.location = '../admin/reset-password.php'; </script>";
 }
 
 if (isset($_POST['add_facility']) ) {
@@ -204,7 +204,7 @@ if (isset($_POST['add_facility']) ) {
         $_SESSION['facility_added'] = false;
     }
 
-    echo "<script type='text/javascript'> document.location = '../admin/add_instrumentation_facility.php'; </script>";
+    echo "<script type='text/javascript'> document.location = '../admin/add-instrumentation-facility.php'; </script>";
 }
 
 if (isset($_POST['niper_personnel']) ) {
@@ -247,7 +247,7 @@ if (isset($_POST['niper_personnel']) ) {
     } else {
         $_SESSION['niper_personnel_application'] = 'fail';
     }
-    echo "<script type='text/javascript'> document.location = '../users/niper_personnel.php'; </script>";
+    echo "<script type='text/javascript'> document.location = '../users/niper-personnel.php'; </script>";
 }
 
 
@@ -256,7 +256,7 @@ if (isset($_POST['application_accept']) ) {
     $sql = "UPDATE `internal_applicants` SET `status` = '4' WHERE `internal_applicants`.`id` = '$current_applicant_id'";
     $conn->query($sql);
 
-    echo "<script type='text/javascript'> document.location = '../admin/applicants.php'; </script>";
+    echo "<script type='text/javascript'> document.location = '../admin/internal-applicants.php'; </script>";
 }
 
 
@@ -266,7 +266,7 @@ if (isset($_POST['application_delete']) ) {
     $current_applicant_id = $_POST['niper_personnel_id'];
     $sql = "DELETE FROM `internal_applicants` WHERE `internal_applicants`.`id` = '$current_applicant_id'";
     $conn->query($sql);
-    echo "<script type='text/javascript'> document.location = '../admin/applicants.php'; </script>";
+    echo "<script type='text/javascript'> document.location = '../admin/internal-applicants.php'; </script>";
 }
 
 if (isset($_POST['application_complete']) ) {
@@ -294,10 +294,12 @@ if (isset($_POST['application_complete']) ) {
     }
     //----------------------------------------------------------------------------------------------------//
 
-    $sql = "UPDATE `internal_applicants` SET `status` = '3' WHERE `internal_applicants`.`id` = '$current_applicant_id'";
-    $conn->query($sql);
+    if( isset( $_POST['complete_report'] ) ) {
+        $sql = "UPDATE `internal_applicants` SET `status` = '3' WHERE `internal_applicants`.`id` = '$current_applicant_id'";
+        $conn->query($sql);
+    }
 
-    echo "<script type='text/javascript'> document.location = '../admin/applicants.php'; </script>";
+    echo "<script type='text/javascript'> document.location = '../admin/internal-applicants.php'; </script>";
 }
 
 if (isset($_POST['application_reject']) ) {
@@ -320,7 +322,7 @@ if (isset($_POST['application_reject']) ) {
     }
     $sql = "UPDATE `internal_applicants` SET `status` = '2' WHERE `internal_applicants`.`id` = '$current_applicant_id'";
     $conn->query($sql);
-    echo "<script type='text/javascript'> document.location = '../admin/applicants.php'; </script>";
+    echo "<script type='text/javascript'> document.location = '../admin/internal-applicants.php'; </script>";
 }
 
 if (isset($_POST['check_status']) ) {
@@ -341,7 +343,7 @@ if (isset($_POST['check_status']) ) {
         $_SESSION["check_status"] = 'fail';
     }
 
-    echo "<script type='text/javascript'> document.location = '../users/check_status.php'; </script>";
+    echo "<script type='text/javascript'> document.location = '../users/check-status.php'; </script>";
     
 }
 
