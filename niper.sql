@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2018 at 09:14 AM
+-- Generation Time: Oct 19, 2018 at 04:44 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -58,39 +58,41 @@ CREATE TABLE `facilities` (
   `facility` varchar(80) NOT NULL,
   `industry_charge` int(11) NOT NULL,
   `institute_charge` int(11) NOT NULL,
-  `remark` varchar(80) NOT NULL
+  `remark` varchar(80) NOT NULL,
+  `availability` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `facilities`
 --
 
-INSERT INTO `facilities` (`id`, `instrument_id`, `facility`, `industry_charge`, `institute_charge`, `remark`) VALUES
-(1, 1, 'MS+VE', 4500, 2250, 'per mode'),
-(2, 1, 'MS-VE', 4500, 2250, 'per mode'),
-(3, 1, 'HR-MS', 5500, 2750, 'per mode'),
-(4, 1, 'HRMS-MS', 10000, 5000, 'per mode'),
-(5, 2, 'Qualitative Analysis', 3500, 1750, 'per run'),
-(6, 2, 'Qualitative Analysis', 1500, 750, 'per run'),
-(7, 3, 'Standard Tests', 1500, 750, 'per sample'),
-(8, 4, 'Standard Tests', 1500, 750, 'per sample'),
-(9, 5, 'Standard Tests', 7000, 3500, 'per run'),
-(10, 6, 'Standard Tests', 3000, 1500, 'per sample'),
-(11, 7, 'Specific Optical Rotation for each Wavelength', 3000, 1500, 'per Spectrum'),
-(12, 7, 'Optical Rotation for each Wavelength', 2000, 1000, 'per Spectrum'),
-(13, 8, 'Standard Tests', 4000, 2000, 'per hour of Instrument time'),
-(14, 9, 'Standard Tests', 4000, 2000, 'per hour of Instrument time'),
-(15, 10, 'Standard Tests', 5500, 2750, 'per sample'),
-(16, 11, 'Standard Tests with Cyber green Dye', 1500, 750, 'per sample'),
-(17, 11, 'Standard Tests with Taqman Dye', 3000, 1500, 'per sample'),
-(18, 12, 'Standard Tests', 2000, 1000, 'per sample'),
-(19, 13, 'Full spectra', 1500, 750, 'per sample'),
-(20, 13, 'Peltier kinetics', 7000, 3500, 'per hour'),
-(21, 14, 'Standard Tests', 6000, 3000, 'per sample'),
-(22, 15, 'For analysis', 1000, 500, 'per sample'),
-(23, 15, 'For Sorting (Excluding Reagents and Consumables For Each Sample)', 5000, 2500, 'per hour'),
-(24, 16, 'Live Cell Imaging', 7000, 3500, 'per sample'),
-(25, 16, 'Fixed Sample cell', 4500, 2250, 'per sample');
+INSERT INTO `facilities` (`id`, `instrument_id`, `facility`, `industry_charge`, `institute_charge`, `remark`, `availability`) VALUES
+(1, 1, 'MS+VE', 4500, 2250, 'per mode', 1),
+(2, 1, 'MS-VE', 4500, 2250, 'per mode', 1),
+(3, 1, 'HR-MS', 5500, 2750, 'per mode', 1),
+(4, 1, 'MS-MS', 8500, 4250, 'per mode', 1),
+(5, 1, 'HRMS-MS', 10000, 5000, 'per mode', 1),
+(6, 2, 'Qualitative Analysis', 3500, 1750, 'per run (max 3 runs)', 1),
+(7, 2, 'Quantitative Analysis', 1500, 750, 'per run', 1),
+(8, 3, 'Standard Test', 1500, 750, 'per sample', 1),
+(9, 4, 'Standard Test', 1500, 750, 'per sample', 1),
+(10, 5, 'Standard Test', 7000, 3500, 'per run', 1),
+(11, 6, 'Standard Test', 3000, 1500, 'per sample', 1),
+(12, 7, 'Specific Optical Rotation for each Wavelength', 3000, 1500, 'per spectrum', 1),
+(13, 7, 'Optical Rotation for each Wavelength', 2000, 1000, 'per spectrum', 1),
+(14, 8, 'Time based usage', 4000, 2000, 'per hour', 1),
+(15, 9, 'Time based usage', 4000, 2000, 'per hour', 1),
+(16, 10, 'Standard Test', 5500, 2750, 'per sample', 1),
+(17, 11, 'With Cyber green Dye', 1500, 750, 'per sample', 1),
+(18, 11, 'With Taqman Dye', 3000, 1500, 'per sample', 1),
+(19, 12, 'Standard Test', 2000, 1000, 'per sample', 1),
+(20, 13, 'Full spectra', 1500, 750, 'per sample', 1),
+(21, 13, 'Peltier kinetics', 7000, 3500, 'per hour', 1),
+(22, 14, 'Standard Test', 6000, 3000, 'per sample', 1),
+(23, 15, 'Analysis', 1000, 500, 'per sample', 1),
+(24, 15, 'Sorting (Excluding Reagents and Consumables)', 5000, 2500, 'per hour', 1),
+(25, 16, 'Live Cell Imaging', 7000, 3500, 'per sample', 1),
+(26, 16, 'Fixed Sample Cell', 4500, 2250, 'per sample', 1);
 
 -- --------------------------------------------------------
 
@@ -137,20 +139,15 @@ INSERT INTO `instruments` (`id`, `instrument`, `admin_id`) VALUES
 (26, 'MAGNETOMETER', 1),
 (27, 'RAPID MIXER GRANULATOR', 1),
 (28, 'POTENTIOSTAT- GALVANOSTAT (PGSTAT)', 1),
-(29, 'RAPID MIXER GRANULATOR', 1),
-(30, 'MASTERSIZER', 1),
-(31, 'ROTARY COMPRESSION MACHINE', 1),
-(32, 'PIEZOMETER', 1),
-(33, 'UNIVERSAL TESTING MACHINE', 1),
-(34, 'NANODROP', 1),
-(35, 'ELECTRO SPINNING SETUP', 1),
-(36, 'USP Dissolution Apperatus-IV', 1),
-(37, 'ATC FACILITY INCLUDES', 1),
-(38, 'ANIMAL HOUSE FACILITY INCLUDES', 1),
-(39, 'FLASH CHROMATOGRAPHY', 1),
-(40, 'Hey', 1),
-(46, 'MY', 1),
-(47, 'MY', 1);
+(29, 'MASTERSIZER', 1),
+(30, 'ROTARY COMPRESSION MACHINE', 1),
+(31, 'PIEZOMETER', 1),
+(32, 'UNIVERSAL TESTING MACHINE', 1),
+(33, 'NANODROP', 1),
+(34, 'ELECTRO SPINNING SETUP', 1),
+(35, 'USP Dissolution Apperatus-IV', 1),
+(36, 'ATC FACILITY INCLUDES', 1),
+(37, 'ANIMAL HOUSE FACILITY INCLUDES', 1);
 
 -- --------------------------------------------------------
 
@@ -176,13 +173,7 @@ CREATE TABLE `internal_applicants` (
 --
 
 INSERT INTO `internal_applicants` (`id`, `name`, `id_number`, `email`, `contact`, `facility_id`, `message`, `nos`, `timestamp`, `status`) VALUES
-(1, 'abc', '101', 'abc@gmail.com', '1234567890', 1, '', 2, '2018-10-15 13:46:48', 3),
-(3, 'xyz', '103', 'xyz@gmail.com', '4567891230', 3, '', 2, '2018-10-15 14:04:29', 3),
-(4, 'lmo', '104', 'lmo@gmail.com', '1234567890', 4, '', 6, '2018-10-15 14:21:39', 3),
-(5, 'def', '105', 'def@gmail.com', '1234567890', 5, '', 2, '2018-10-08 10:56:42', 3),
-(8, 'xyz', '106', 'xyz@gmail.com', '9998999988', 6, '', 2, '2018-10-15 14:39:18', 3),
-(10, '12313', '231231', 'haahaha', '12312', 2, 'nonnnnee', 3, '2018-10-15 14:41:28', 4),
-(14, 'Hardik', '515151', 'hardikpanchal551@gmail.com', '8181818888', 4, '', 1, '2018-10-15 18:01:07', 4);
+(1, 'Hardik', '1234', 'hardikpanchal551@gmail.com', '8123123213', 1, '', 1, '2018-10-19 14:40:38', 4);
 
 --
 -- Indexes for dumped tables
@@ -206,6 +197,7 @@ ALTER TABLE `facilities`
 --
 ALTER TABLE `instruments`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `instrument` (`instrument`),
   ADD KEY `admin_id` (`admin_id`);
 
 --
@@ -228,19 +220,19 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `facilities`
 --
 ALTER TABLE `facilities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `instruments`
 --
 ALTER TABLE `instruments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `internal_applicants`
 --
 ALTER TABLE `internal_applicants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
