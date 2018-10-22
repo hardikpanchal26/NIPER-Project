@@ -6,20 +6,6 @@
 		    <div class="row justify-content-center" >
 
 		    	<?php
-		        if ( isset( $_SESSION['instrument_added'] ) && $_SESSION['instrument_added'] != FALSE ) 
-		          echo '<div class="alert alert-success pr-5 pl-5" style="width: 1000px;">New Instrument <b>'. $_SESSION['instrument_added'] .'</b> Added</div>';
-		        else if ( isset( $_SESSION['instrument_added'] ) && $_SESSION['instrument_added'] == FALSE ) 
-		          echo '<div class="alert alert-danger pr-5 pl-5" style="width: 1000px;">Server is down. Try Again Later.</div>';
-		        
-		        unset($_SESSION['instrument_added']);
-
-		        if ( isset( $_SESSION['facility_added'] ) && $_SESSION['facility_added'] != FALSE ) 
-		          echo '<div class="alert alert-success pr-5 pl-5" style="width: 1000px;">New Facility <b>'. $_SESSION['facility_added'] .'</b> Added</div>';
-		        else if ( isset( $_SESSION['facility_added'] ) && $_SESSION['facility_added'] == FALSE ) 
-		          echo '<div class="alert alert-danger pr-5 pl-5" style="width: 1000px;">Server is down. Try Again Later.</div>';
-		        
-		        unset($_SESSION['facility_added']);
-
 		        $no_of_instruments = $conn->query( "SELECT COUNT(*) FROM `instruments`" )->fetch_row();
 		        $no_of_facilities = $conn->query( "SELECT COUNT(*) FROM `facilities`" )->fetch_row();
 		        $no_of_supervisors = $conn->query( "SELECT COUNT(*) FROM `admins` ")->fetch_row();

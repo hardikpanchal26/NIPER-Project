@@ -174,7 +174,7 @@
  .breadCurrent, .breadCurrent span { display:inline-block; line-height:32px; }
  
  /*inner with sidebar*/ 
- .leftContent { width:100%; padding: 0 0 0 310px; margin-right:0;}
+ .leftContent { width:100%; padding: 0 0 0 310px; margin-right:0; min-height: 40vh}
  .leftContent a { font-weight: 700; }
  .leftContent p { font-size: 16px; }
 

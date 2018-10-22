@@ -19,6 +19,7 @@
               <th style="vertical-align: middle;">Charges for Institues</th>
               <th style="vertical-align: middle;">Remarks</th>
               <th style="vertical-align: middle;">Facility Availability</th>
+              <th style="vertical-align: middle;">Action</th>
             </tr>
           </thead>
           
@@ -47,6 +48,14 @@
                             <span class="slider round"></span>
                           </label>
                       </td>
+                      <td>
+                        <form action="../database/admin_data.php" method="POST">
+                          <input type="hidden" name="niper_personnel_id" value="<?= $internal_applicants['id'] ?>">
+                              <?php 
+                                  echo '<div style="width:70px; padding-top:2px"><button type="button" class="btn btn-sm" data-toggle="modal" data-target="#edit_charges" style="display: inline-block; width:30px" onclick="set_edit_facility_id('.$row_inner['id'].')" title="Edit Charges"><i class="fa fa-edit"></i></button><span> </span><button type="button" class="btn btn-sm" style="display: inline-block; width:30px" onclick="set_delete_facility_id('.$row_inner['id'].')" title="Delete Facility"><i class="fa fa-trash"></i></button></div>';
+                              ?>
+                        </form>
+                      </td>
                     </tr>
                     <?php endwhile; 
                   }
@@ -56,6 +65,54 @@
           </tbody>
         </table>
       </div>
+      
+      <div>
+      <form action="../database/admin_data.php" method="POST" id="facility_delete_form">
+        <input type="hidden" name="delete_facility" id="facility_delete_id" value="0">
+      </form>
+      </div>            
+
+      <div class="modal" id="edit_charges">
+              <div class="modal-dialog">
+                
+                <div id="send_mail_form_2" class="modal-content">
+                
+                  <div class="modal-header">
+                    <h4 class="modal-title">Edit Charges</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  
+                  <div class="modal-body" align="center" >
+                    <form action="../database/admin_data.php" method="POST" style="width: 50%">
+
+                      <input type="hidden" name="facility_edit_id" id="facility_edit_id" value="">
+                      <div class="form-group mt-4 mb-4">
+                        <label>New Charge for Industry</label>
+                        <input type="text" class="form-control" name="new_industry_charge">
+                      </div>
+                      <div class="form-group mt-4 mb-4">
+                        <label>New Charge for Institute</label>
+                        <input type="text" class="form-control" name="new_institute_charge">
+                      </div>
+                      <input type="submit" class="btn btn-primary w-100 mb-4" name="edit_facility" value="Edit Charges">
+                    </form>
+                  </div>
+                  
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  </div>
+                  
+                </div>
+                <div id="send_mail_loader_2" class="modal-content" align="center" style="color:#102d53; min-height: 500px; display: none;">
+                  
+                  <div style="margin-top: 200px"><i class="fa fa-spinner fa-spin" style="font-size:48px"></i></div>
+                  
+                  <div class="mt-3 mb-2">S E N D I N G  &nbsp; M A I L ...</div>
+                  <div>Please be patient. It may take a while.</div>
+                </div>
+
+              </div>
+            </div>
     
 
     <script type="text/javascript">

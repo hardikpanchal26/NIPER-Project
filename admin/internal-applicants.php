@@ -125,7 +125,7 @@
   </script>
 
 <?php else :?>
-  <h1 style="width: 100%; height: 40vh">Access Denied</h1>
+  <h1 style="width: 100%; ">Access Denied</h1>
 <?php endif; ?>
 </div>
 

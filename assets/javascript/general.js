@@ -422,3 +422,12 @@ function submit_facility_avaibility_form(id) {
 
     });
 }
+
+function set_edit_facility_id(id) {
+	$('#facility_edit_id').val(id);
+}
+
+function set_delete_facility_id(id) {
+	$('#facility_delete_id').val(id);
+	$( "#facility_delete_form" ).submit();
+}

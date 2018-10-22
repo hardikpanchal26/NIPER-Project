@@ -105,12 +105,12 @@
 <?php 
 session_start();
 require 'config.php';
+
+//----------------- Mail Configuration -------------------------//
+
 include 'PHPMailer/PHPMailerAutoload.php';
 
     $mail = new PHPMailer;
-
-    //$mail->SMPTDebug = 4;
-
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
@@ -119,8 +119,11 @@ include 'PHPMailer/PHPMailerAutoload.php';
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587;                                    // TCP port to connect to
     $mail->setFrom('cif.niperahm@gmail.com', 'NIPER Ahmedabad');
-    
 
+//------------------------------------------------------------//
+
+
+//----------------------------Admin Login, Logout and Reset Password --------------------//
 
 if (isset($_POST['admin_login']) ) {
 
@@ -148,20 +151,6 @@ if (isset($_POST['admin_logout']) ) {
     echo "<script type='text/javascript'> document.location = '../admin/niper-admin.php'; </script>";
 }
 
-if (isset($_POST['add_instrument']) ) {
-    $instrument = $_POST['instrument'];
-    $supervisor = $_POST['supervisor'];
-    $sql = "INSERT INTO `instruments`(`id`, `instrument`, `admin_id`) VALUES (NULL,'$instrument','$supervisor')";
-
-    if ($conn->query($sql) ) {
-        $_SESSION['instrument_added'] = $instrument;
-    } else {
-        $_SESSION['instrument_added'] = false;
-    }
-
-    echo "<script type='text/javascript'> document.location = '../admin/add-instrumentation-facility.php'; </script>";
-}
-
 if (isset($_POST['reset_password']) ) {
 
     $username = $_SESSION['admin_logged_in'];
@@ -187,6 +176,27 @@ if (isset($_POST['reset_password']) ) {
     echo "<script type='text/javascript'> document.location = '../admin/reset-password.php'; </script>";
 }
 
+//-------------------------------------------------------------------//
+
+
+//------------ Add Instrument and Facility ---------------------------//
+
+
+if (isset($_POST['add_instrument']) ) {
+    $instrument = $_POST['instrument'];
+    $supervisor = $_POST['supervisor'];
+    $sql = "INSERT INTO `instruments`(`id`, `instrument`, `admin_id`) VALUES (NULL,'$instrument','$supervisor')";
+
+    if ($conn->query($sql) ) {
+        $_SESSION['instrument_added'] = $instrument;
+    } else {
+        $_SESSION['instrument_added'] = false;
+    }
+
+    echo "<script type='text/javascript'> document.location = '../admin/add-instrumentation-facility.php'; </script>";
+}
+
+
 if (isset($_POST['add_facility']) ) {
     
     $instrument_id     = $_POST['selected_instrument'];
@@ -206,6 +216,30 @@ if (isset($_POST['add_facility']) ) {
 
     echo "<script type='text/javascript'> document.location = '../admin/add-instrumentation-facility.php'; </script>";
 }
+
+if (isset($_POST['edit_facility']) ) {
+    
+    $facility_id = $_POST['facility_edit_id'];
+    $industry_charge = $_POST['new_industry_charge'];
+    $institute_charge = $_POST['new_institute_charge'];
+    
+    $sql = "UPDATE `facilities` SET `industry_charge` = '$industry_charge', `institute_charge` = '$institute_charge' WHERE `facilities`.`id` = '$facility_id';";
+    $conn->query($sql);
+    echo "<script type='text/javascript'> document.location = '../admin/instrument-list.php'; </script>";
+}
+
+if (isset($_POST['delete_facility']) ) {
+    $facility_id = $_POST['delete_facility'];
+    $sql = "DELETE FROM `facilities` WHERE `facilities`.`id` = '$facility_id';";
+    $conn->query($sql);
+    echo "<script type='text/javascript'> document.location = '../admin/instrument-list.php'; </script>";
+}
+
+
+//-------------------------------------------------------------------------------------//
+
+
+//----------------------Internal Applicants ----------------------------------------------//
 
 if (isset($_POST['niper_personnel']) ) {
     
@@ -250,7 +284,6 @@ if (isset($_POST['niper_personnel']) ) {
     echo "<script type='text/javascript'> document.location = '../users/niper-personnel.php'; </script>";
 }
 
-
 if (isset($_POST['application_accept']) ) {
     $current_applicant_id = $_POST['niper_personnel_id'];
     $sql = "UPDATE `internal_applicants` SET `status` = '4' WHERE `internal_applicants`.`id` = '$current_applicant_id'";
@@ -258,9 +291,6 @@ if (isset($_POST['application_accept']) ) {
 
     echo "<script type='text/javascript'> document.location = '../admin/internal-applicants.php'; </script>";
 }
-
-
-
 
 if (isset($_POST['application_delete']) ) {
     $current_applicant_id = $_POST['niper_personnel_id'];
@@ -343,8 +373,9 @@ if (isset($_POST['check_status']) ) {
         $_SESSION["check_status"] = 'fail';
     }
 
-    echo "<script type='text/javascript'> document.location = '../users/check-status.php'; </script>";
-    
+    echo "<script type='text/javascript'> document.location = '../users/check-status.php'; </script>";   
 }
+
+//-----------------------------------------------------------------------------------------//
 
 ?>

@@ -36,10 +36,7 @@
         ?> 
               
         </tbody>
-      
-
       </table>
-    
     </div>
   
 
@@ -76,15 +73,11 @@
       $('.dt-button').removeClass('dt-button');
       $('.dt-buttons').removeClass('dt-button');
       $('#admin_table').addClass('pt-3');
-      //$('.dataTables_filter').addClass('input-group');
       $('.dataTables_filter').css({'margin-right' : '150px' });
       $('.dataTables_filter input').addClass('form-control');
       $('.dataTables_length select').addClass('form-control');
       $('.dataTables_filter input').css({'display' : 'inherit', 'width': '75%'});
       $('.dataTables_length select').css({'display' : 'inherit', 'width': '40%'});
-
-
-
     });
   </script>
 

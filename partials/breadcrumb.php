@@ -7,7 +7,7 @@
   <div class="container">
     <span id="ContentPlaceHolder1_BreadCrumbControl1_SiteMapPath1">
       <span>
-        <a class="homeBLink breadLink" href="index.html" title="Home">
+        <a class="homeBLink breadLink" href="<?= site_url(); ?>" title="Home">
           <span class="bgleft">
             <span class="bg">Home</span>
           </span>
@@ -15,7 +15,7 @@
       </span>
       <span></span>
       <span>
-        <a href="http://nipergn.ac.in/error.htm" id="ContentPlaceHolder1_BreadCrumbControl1_SiteMapPath1_aParent_1" class="breadLink">
+        <a href="<?= site_url(); ?>">
           <span class="bgleft">
             <span class="bg">Instrument Facility</span>
               </span>
