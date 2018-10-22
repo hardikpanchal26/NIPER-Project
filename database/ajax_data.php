@@ -4,7 +4,7 @@ require 'config.php';
 
 if (isset($_POST['instrument_id']) ) {
     $instrument_id = $_POST['instrument_id'];
-    $facilities  = $conn->query("SELECT * FROM `facilities` WHERE `instrument_id` = '$instrument_id'");
+    $facilities  = $conn->query("SELECT * FROM `facilities` WHERE `instrument_id` = '$instrument_id' AND `availability` = 1");
 
     echo '<option selected>-- Select Facility --</option>';
 

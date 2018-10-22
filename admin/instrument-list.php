@@ -52,7 +52,7 @@
                         <form action="../database/admin_data.php" method="POST">
                           <input type="hidden" name="niper_personnel_id" value="<?= $internal_applicants['id'] ?>">
                               <?php 
-                                  echo '<div style="width:70px; padding-top:2px"><button type="button" class="btn btn-sm" data-toggle="modal" data-target="#edit_charges" style="display: inline-block; width:30px" onclick="set_edit_facility_id('.$row_inner['id'].')" title="Edit Charges"><i class="fa fa-edit"></i></button><span> </span><button type="button" class="btn btn-sm" style="display: inline-block; width:30px" onclick="set_delete_facility_id('.$row_inner['id'].')" title="Delete Facility"><i class="fa fa-trash"></i></button></div>';
+                                  echo '<div style="padding-top:2px"><button type="button" class="btn btn-sm" data-toggle="modal" data-target="#edit_charges" style="display: inline-block;" onclick="set_edit_facility_id('.$row_inner['id'].')" title="Edit Charges"><i class="fa fa-edit pr-2"></i>Edit Charge</button></div>';
                               ?>
                         </form>
                       </td>
@@ -67,9 +67,11 @@
       </div>
       
       <div>
+        <!--
       <form action="../database/admin_data.php" method="POST" id="facility_delete_form">
         <input type="hidden" name="delete_facility" id="facility_delete_id" value="0">
       </form>
+    -->
       </div>            
 
       <div class="modal" id="edit_charges">
@@ -122,23 +124,28 @@
           buttons: [
           {
             extend: 'copyHtml5',
-            title: 'Instrument Data'
+            title: 'Instrument Data',
+            exportOptions: {columns: ':visible:not(:eq(6), :eq(7))' }
           },
           {
             extend: 'excelHtml5',
-            title: 'Instrument Data'
+            title: 'Instrument Data',
+            exportOptions: {columns: ':visible:not(:eq(6), :eq(7))' }
           },
           {
             extend: 'pdfHtml5',
-            title: 'Instrument Data'
+            title: 'Instrument Data',
+            exportOptions: {columns: ':visible:not(:eq(6), :eq(7))' }
           },
           {
             extend: 'csvHtml5',
-            title: 'Instrument Data'
+            title: 'Instrument Data',
+            exportOptions: {columns: ':visible:not(:eq(6), :eq(7))' }
           },
           {
             extend: 'print',
-            title: 'Instrument Data'
+            title: 'Instrument Data',
+            exportOptions: {columns: ':visible:not(:eq(6), :eq(7))' }
           }
           ]
         });

@@ -16,7 +16,7 @@
         
         unset($_SESSION['facility_added']);
 
-        $instruments = $conn->query( "SELECT * FROM `instruments`" );
+        $instruments = $conn->query( "SELECT DISTINCT f.`instrument_id`, i.`instrument` FROM `facilities` f INNER JOIN `instruments` i ON f.`instrument_id`=i.`id` WHERE f. `availability` = 1" );
       ?>
 
     
@@ -106,7 +106,7 @@
               <?php
                 if ($instruments->num_rows > 0) {
                   while($row = $instruments->fetch_assoc()) {
-                    echo '<option value="'.$row['id'].'">'. $row['instrument'] .'</option>';
+                    echo '<option value="'.$row['instrument_id'].'">'. $row['instrument'] .'</option>';
                   }
                 }
               ?>

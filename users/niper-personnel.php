@@ -14,7 +14,7 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
       unset( $_SESSION['niper_personnel_application'] );
     }
     
-    $instruments = $conn->query( "SELECT * FROM `instruments`" );
+    $instruments = $conn->query( "SELECT DISTINCT f.`instrument_id`, i.`instrument` FROM `facilities` f INNER JOIN `instruments` i ON f.`instrument_id`=i.`id` WHERE f. `availability` = 1" );
     ?>
     <div class="px-5 px-add" style="border:2px solid #f2f2f2; width: 1000px; background: #f2f2f2">
       <form method="POST" action="../database/admin_data.php" id="niper_personnel_form" onsubmit="return validate_niper_personnel()">
@@ -76,7 +76,7 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
                 <?php
                   if ($instruments->num_rows > 0) {
                     while($row = $instruments->fetch_assoc()) {
-                      echo '<option value="'.$row['id'].'">'. $row['instrument'] .'</option>';
+                      echo '<option value="'.$row['instrument_id'].'">'. $row['instrument'] .'</option>';
                     }
                   }
                 ?>
