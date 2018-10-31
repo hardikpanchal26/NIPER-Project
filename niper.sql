@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2018 at 04:44 PM
+-- Generation Time: Oct 31, 2018 at 04:50 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -73,7 +73,7 @@ INSERT INTO `facilities` (`id`, `instrument_id`, `facility`, `industry_charge`, 
 (4, 1, 'MS-MS', 8500, 4250, 'per mode', 1),
 (5, 1, 'HRMS-MS', 10000, 5000, 'per mode', 1),
 (6, 2, 'Qualitative Analysis', 3500, 1750, 'per run (max 3 runs)', 1),
-(7, 2, 'Quantitative Analysis', 1500, 750, 'per run', 1),
+(7, 2, 'Quantitative Analysis', 1500, 750, 'per run', 0),
 (8, 3, 'Standard Test', 1500, 750, 'per sample', 1),
 (9, 4, 'Standard Test', 1500, 750, 'per sample', 1),
 (10, 5, 'Standard Test', 7000, 3500, 'per run', 1),
@@ -103,51 +103,52 @@ INSERT INTO `facilities` (`id`, `instrument_id`, `facility`, `industry_charge`, 
 CREATE TABLE `instruments` (
   `id` int(11) NOT NULL,
   `instrument` varchar(80) NOT NULL,
-  `admin_id` int(11) NOT NULL
+  `admin_id` int(11) NOT NULL,
+  `form_factors` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `instruments`
 --
 
-INSERT INTO `instruments` (`id`, `instrument`, `admin_id`) VALUES
-(1, 'LC-MS-QTOF', 1),
-(2, 'HPLC', 1),
-(3, 'FTIR', 1),
-(4, 'ATR', 1),
-(5, 'SEMI-PREP HPLC', 1),
-(6, 'GC', 1),
-(7, 'POLARIMETER', 1),
-(8, 'DSC', 1),
-(9, 'TGA', 1),
-(10, 'POROSIMETER', 1),
-(11, 'RT-PCR', 1),
-(12, 'TEXTURE ANALYZER', 1),
-(13, 'UV- VISIBLE SPECTROSCOPY', 1),
-(14, 'GPC', 1),
-(15, 'FACS', 1),
-(16, 'CONFOCAL MICROSCOPE', 1),
-(17, 'FLASH CHROMATOGRAPHY', 1),
-(18, 'INVERTED MICROSCOPE', 1),
-(19, 'HOTSTAGE MICROSCOPE', 1),
-(20, 'AUTOCOATER', 1),
-(21, 'STABILITY CHAMBER', 1),
-(22, 'RHEOMETER', 1),
-(23, 'ZETASIZER', 1),
-(24, 'ULTRA CENTRIFUGE', 1),
-(25, 'BIO ANALYZER', 1),
-(26, 'MAGNETOMETER', 1),
-(27, 'RAPID MIXER GRANULATOR', 1),
-(28, 'POTENTIOSTAT- GALVANOSTAT (PGSTAT)', 1),
-(29, 'MASTERSIZER', 1),
-(30, 'ROTARY COMPRESSION MACHINE', 1),
-(31, 'PIEZOMETER', 1),
-(32, 'UNIVERSAL TESTING MACHINE', 1),
-(33, 'NANODROP', 1),
-(34, 'ELECTRO SPINNING SETUP', 1),
-(35, 'USP Dissolution Apperatus-IV', 1),
-(36, 'ATC FACILITY INCLUDES', 1),
-(37, 'ANIMAL HOUSE FACILITY INCLUDES', 1);
+INSERT INTO `instruments` (`id`, `instrument`, `admin_id`, `form_factors`) VALUES
+(1, 'LC-MS-QTOF', 1, ''),
+(2, 'HPLC', 1, ''),
+(3, 'FTIR', 1, ''),
+(4, 'ATR', 1, ''),
+(5, 'SEMI-PREP HPLC', 1, ''),
+(6, 'GC', 1, ''),
+(7, 'POLARIMETER', 1, ''),
+(8, 'DSC', 1, ''),
+(9, 'TGA', 1, ''),
+(10, 'POROSIMETER', 1, ''),
+(11, 'RT-PCR', 1, ''),
+(12, 'TEXTURE ANALYZER', 1, ''),
+(13, 'UV- VISIBLE SPECTROSCOPY', 1, ''),
+(14, 'GPC', 1, ''),
+(15, 'FACS', 1, ''),
+(16, 'CONFOCAL MICROSCOPE', 1, ''),
+(17, 'FLASH CHROMATOGRAPHY', 1, ''),
+(18, 'INVERTED MICROSCOPE', 1, ''),
+(19, 'HOTSTAGE MICROSCOPE', 1, ''),
+(20, 'AUTOCOATER', 1, ''),
+(21, 'STABILITY CHAMBER', 1, ''),
+(22, 'RHEOMETER', 1, ''),
+(23, 'ZETASIZER', 1, ''),
+(24, 'ULTRA CENTRIFUGE', 1, ''),
+(25, 'BIO ANALYZER', 1, ''),
+(26, 'MAGNETOMETER', 1, ''),
+(27, 'RAPID MIXER GRANULATOR', 1, ''),
+(28, 'POTENTIOSTAT- GALVANOSTAT (PGSTAT)', 1, ''),
+(29, 'MASTERSIZER', 1, ''),
+(30, 'ROTARY COMPRESSION MACHINE', 1, ''),
+(31, 'PIEZOMETER', 1, ''),
+(32, 'UNIVERSAL TESTING MACHINE', 1, ''),
+(33, 'NANODROP', 1, ''),
+(34, 'ELECTRO SPINNING SETUP', 1, ''),
+(35, 'USP Dissolution Apperatus-IV', 1, ''),
+(36, 'ATC FACILITY INCLUDES', 1, ''),
+(37, 'ANIMAL HOUSE FACILITY INCLUDES', 1, '');
 
 -- --------------------------------------------------------
 
@@ -162,18 +163,12 @@ CREATE TABLE `internal_applicants` (
   `email` varchar(80) NOT NULL,
   `contact` varchar(15) NOT NULL,
   `facility_id` int(11) NOT NULL,
+  `form_values` longtext NOT NULL,
   `message` longtext NOT NULL,
   `nos` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `internal_applicants`
---
-
-INSERT INTO `internal_applicants` (`id`, `name`, `id_number`, `email`, `contact`, `facility_id`, `message`, `nos`, `timestamp`, `status`) VALUES
-(1, 'Hardik', '1234', 'hardikpanchal551@gmail.com', '8123123213', 1, '', 1, '2018-10-19 14:40:38', 4);
 
 --
 -- Indexes for dumped tables
@@ -232,7 +227,7 @@ ALTER TABLE `instruments`
 -- AUTO_INCREMENT for table `internal_applicants`
 --
 ALTER TABLE `internal_applicants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
