@@ -29,6 +29,9 @@
 
 		        <h3 align="center" class="mb-4 mt-4">Add New Instrument</h3>
 		        <span>Add a new instrument.</span>
+
+
+		        
 		        
 		        <div class="row mb-2">
 		          <div class="col-md-6">
@@ -65,6 +68,47 @@
 		            </div>
 		          </div>
 		        </div>
+
+		        <div class="row mb-2 justify-content-center px-3">
+		          <div class="col-md-12 mb-4" align="center" style="background: #fff; border:1px solid #ced4da">
+		            <table width="100%" class="table-bordered mt-4" cellpadding="5px" id="form_factors">
+		              <tr> 
+		                <td width="15%" align="center"><b>Sr No.</b></td>
+		                <td width="45%" class="px-4" align="center"><b>Label</b></td>
+		                <td align="center"><b>Type</b></td>
+		              </tr>
+		            </table>
+		          </div>
+		        </div>
+
+		        <div class="row mb-2">
+		        	<div class="col-md-6">
+		          		<div class="input-group mb-4">
+		          			<div class="input-group-prepend">
+      							<span class="input-group-text">Blank</span>
+    						</div>
+			          		<input type="text" class="form-control" placeholder="Label" id="blank">
+							<div class="input-group-append">
+								<button class="btn btn-secondary" type="button" id="blank_btn"><i class="fa fa-plus"></i></button> 
+							</div>
+		          		</div>
+		        	</div>
+
+		        	<div class="col-md-6">
+		          		<div class="input-group mb-4">
+		          			<div class="input-group-prepend">
+      							<span class="input-group-text">Choice</span>
+    						</div>
+			          		<input type="text" class="form-control" placeholder="Label: Comma separated values" id="choice">
+							<div class="input-group-append">
+								<button class="btn btn-secondary" type="button" id="choice_btn"><i class="fa fa-plus"></i></button> 
+							</div>
+		          		</div>
+		        	</div>
+		        </div>
+
+		        	<input type="hidden" value="" id="instrument_form_factors" name="form_factors" >
+
 		      </form>
 		      </div>
 		    </div>
@@ -128,7 +172,6 @@
 		        </div>
 		      </div>
 
-
 		      <div class="row mb-2">
 		        <div class="col-md-6">
 		          <div class="input-group mb-5">
@@ -146,9 +189,6 @@
 		        </div>
 		      </div>
 
-
-
-
 		      </form>
 		      </div>
 		    </div>
@@ -159,5 +199,42 @@
 	<h1 style="width: 100%; height: 40vh">Access Denied</h1>
 <?php endif; ?>
 </div>
+
+<script type="text/javascript">
+	var i =1;
+	var form_data = new Array();
+ 
+	$('#blank_btn').click( function() {
+
+		var label = $('#blank').val();
+		var type = 'Blank'; 
+		$('#form_factors').append('<tr><td align="center">'+ i++ +'</td><td>'+label+'</td><td>'+type+'</td></tr>'
+		);
+
+		var insert_array = new Object();
+		insert_array.type = "text";
+		insert_array.label= label;
+		form_data.push(insert_array);
+		$('#instrument_form_factors').val(JSON.stringify(form_data));
+		$('#blank').val('');
+	});
+
+	$('#choice_btn').click( function() {
+		var data = $('#choice').val();
+		var label = data.split(':')[0];
+		var type = data.split(':')[1]; 
+		$('#form_factors').append('<tr><td align="center">' + i++ + '</td><td>'+label+'</td><td>'+ 'Choices: ' + type+'</td></tr>'
+		);
+
+
+		var insert_array = new Object();
+		insert_array.type = "select";
+		insert_array.label= label;
+		insert_array.choices= type.split(",");
+		form_data.push(insert_array);
+		$('#instrument_form_factors').val(JSON.stringify(form_data));
+		$('#choice').val('');
+	});
+</script>
 
 <?php include DIRNAME( __DIR__ ).'/layouts/master_layout_bottom.php'; ?>

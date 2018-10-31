@@ -82,6 +82,11 @@
 
   <script type="text/javascript">
     $(document).ready( function () {
+      
+      $('.buttons-html5').click( function() {
+        alert("Hello");
+      });
+
       $('#internal_applicants_table').DataTable( {
         dom: 'Blfrtip',
         buttons: [

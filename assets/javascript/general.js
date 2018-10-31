@@ -156,6 +156,19 @@ function get_facility() {
     });
 }
 
+function get_form_factors() {
+	var instrument = $("#selected_instrument").val();
+	$.ajax({
+    	type:'POST',
+        url:'../database/ajax_data.php',
+        data: {instrument_id2: instrument},
+        success:function(html){
+        	$('#form_factor_data').html(html);
+        }
+
+    });
+}
+
 function validate_niper_personnel() {
 	var name          = $('#niper_personnel_form #name').val();
 	var id_num        = $('#niper_personnel_form #enroll_no').val();

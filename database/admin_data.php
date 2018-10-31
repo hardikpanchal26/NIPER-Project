@@ -185,7 +185,9 @@ if (isset($_POST['reset_password']) ) {
 if (isset($_POST['add_instrument']) ) {
     $instrument = $_POST['instrument'];
     $supervisor = $_POST['supervisor'];
-    $sql = "INSERT INTO `instruments`(`id`, `instrument`, `admin_id`) VALUES (NULL,'$instrument','$supervisor')";
+    $form_factors = $_POST['form_factors'];
+
+    $sql = "INSERT INTO `instruments`(`id`, `instrument`, `admin_id`, `form_factors`) VALUES (NULL,'$instrument','$supervisor', '$form_factors')";
 
     if ($conn->query($sql) ) {
         $_SESSION['instrument_added'] = $instrument;
@@ -249,13 +251,17 @@ if (isset($_POST['niper_personnel']) ) {
     $email         = $_POST['email'];
     $contact       = $_POST['contact'];
     $facility      = $_POST['facility']; 
+    if(isset($_POST['this_form'])) {
+        $this_form = serialize($_POST['this_form']);
+    }
+    else $this_form = "";
     $message       = $_POST['message'];
     $no_of_samples = $_POST['no_of_samples'];
 
     //echo $name.' '.$enroll_no.' '.$email.' '.$contact.' '.$selected_instrument.' '.$facility.' '.$message.' '.$no_of_samples;
     //die(); 
     
-    $sql = "INSERT INTO `internal_applicants` (`id`, `name`, `id_number`, `email`, `contact`, `facility_id`, `message`, `nos`, `timestamp`, `status`) VALUES (NULL, '$name', '$enroll_no', '$email', '$contact', '$facility', '$message', '$no_of_samples', CURRENT_TIMESTAMP, '1')";
+    $sql = "INSERT INTO `internal_applicants` (`id`, `name`, `id_number`, `email`, `contact`, `facility_id`, `form_values`, `message`, `nos`, `timestamp`, `status`) VALUES (NULL, '$name', '$enroll_no', '$email', '$contact', '$facility', '$this_form', '$message', '$no_of_samples', CURRENT_TIMESTAMP, '1')";
 
     if ($conn->query($sql) ) {
         $last_id = $conn->insert_id;
@@ -266,7 +272,7 @@ if (isset($_POST['niper_personnel']) ) {
         $mail->isHTML(true);                  // Set email format to HTML
 
         $mail->Subject = "CIF NIPER Ahmedabad";
-        $mail->Body    = '<p>Dear, '.$applicant_name.'</p><p>Your Application for using NIPER Ahmedabad Central Instrumentation Facility has been sucessfully received. Your Application ID is <b>'.$last_id.'</b>. You may check status of your application through NIPER CIF Portal using provided Application ID.</p><p>Regards,<br>Central Instrumentation Facility Department,<br>NIPER Ahmedabad<p>';
+        $mail->Body    = '<p>Dear, '.$name.'</p><p>Your Application for using NIPER Ahmedabad Central Instrumentation Facility has been sucessfully received. Your Application ID is <b>'.$last_id.'</b>. You may check status of your application through NIPER CIF Portal using provided Application ID.</p><p>Regards,<br>Central Instrumentation Facility Department,<br>NIPER Ahmedabad<p>';
         
         if (!$mail->send()) {
             echo 'Message could not be sent.';

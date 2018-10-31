@@ -45,6 +45,19 @@
                 <td><?= $facility['facility'] ?></td>
               </tr>
               <tr>
+                <td><b>Sample Data</b></td>
+                <td>
+                  <?php if($internal_applicants['form_values'] != "") : ?>
+                    <?php $form_values = unserialize($internal_applicants['form_values']); ?>
+                  <ul>
+                    <?php foreach($form_values as $value) : ?>
+                      <li><?= $value ?></li>
+                    <?php endforeach; ?>
+                  </ul>
+                  <?php endif; ?>
+                </td>
+              </tr>
+              <tr>
                 <td><b>Number of Samples</b></td>
                 <td><?= $internal_applicants['nos'] ?></td>
               </tr>

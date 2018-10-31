@@ -71,7 +71,7 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
               <div class="input-group-prepend">
                 <span class="input-group-text" ><i class="fa fa-wrench"></i></span>
               </div>
-              <select class="custom-select form-control" name="selected_instrument" id="selected_instrument" onchange="get_facility();">
+              <select class="custom-select form-control" name="selected_instrument" id="selected_instrument" onchange="get_facility(), get_form_factors();">
                 <option selected>-- Select Instrument --</option>
                 <?php
                   if ($instruments->num_rows > 0) {
@@ -94,6 +94,10 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
               </select>
             </div>
           </div>
+        </div>
+        
+        <div class="row mb-2 justify-content-center px-3" id="form_factor_data"> 
+          
         </div>
 
         <div class="row mb-2 justify-content-center">
@@ -136,4 +140,9 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
   </div>
 </div>
   
+<script type="text/javascript">
+  $(document).ready( function () {
+      
+});
+</script>
 <?php include DIRNAME( __DIR__ ).'/layouts/master_layout_bottom.php'; ?> 
