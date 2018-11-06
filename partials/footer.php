@@ -1,6 +1,7 @@
 <div id="footer">
   <div class="container">
     <div class="footerLeft">
+      <!--
       <ul class="footerLinks">
         <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
         <li><a href="privacy-policy.html">Privacy Policy</a></li>
@@ -9,7 +10,8 @@
         <li><a href="disclaimer.html">Disclaimer</a></li>
         <li><a href="help.html">Help</a></li>
       </ul>
-      <span class="copyRight">© Copyright Owned by National Institute of Pharmaceutical Education and Research (NIPER) - Ahmedabad</span>
+    -->
+      <span class="copyRight pt-3">© Copyright Owned by National Institute of Pharmaceutical Education and Research (NIPER) - Ahmedabad</span>
     </div>
 
     <div class="siteStatus">

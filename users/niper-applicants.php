@@ -10,7 +10,7 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
       if($_SESSION['niper_personnel_application'] != 'fail')
         echo '<div class="alert alert-success pr-5 pl-5" style="width: 1000px;">Application Successfully Submitted. Application ID is <b>'.$_SESSION['niper_personnel_application'].'</b></div>';
       else 
-        echo '<div class="alert alert-danger pr-5 pl-5" style="width: 1000px;">Server is down. Try Again Later.</div>';
+        echo '<div class="alert alert-danger pr-5 pl-5" style="width: 1000px;">Some error occured. Please try again later.</div>';
       unset( $_SESSION['niper_personnel_application'] );
     }
     
@@ -18,7 +18,7 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
     ?>
     <div class="px-5 px-add" style="border:2px solid #f2f2f2; width: 1000px; background: #f2f2f2">
       <form method="POST" action="../database/admin_data.php" id="niper_personnel_form" onsubmit="return validate_niper_personnel()">
-        <h3 align="center" class="mb-4 mt-4">Instrumentation Facility Form for NIPER Personnel</h3>
+        <h3 align="center" class="mb-4 mt-4">Instrumentation Facility Form for NIPER Applicants</h3>
         <br>
 
         <div class="row mb-2 justify-content-center">
@@ -140,9 +140,4 @@ include DIRNAME( __DIR__ ).'/layouts/master_layout_top.php';
   </div>
 </div>
   
-<script type="text/javascript">
-  $(document).ready( function () {
-      
-});
-</script>
 <?php include DIRNAME( __DIR__ ).'/layouts/master_layout_bottom.php'; ?> 

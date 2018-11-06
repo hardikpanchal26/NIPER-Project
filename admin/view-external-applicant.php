@@ -3,38 +3,50 @@
 <div class="leftContent">
 <?php if(isset($_SESSION ['admin_logged_in']) ) :?>
     <?php 
-      $applicant_id = $_POST['niper_personnel_id'];
-      $internal_applicants = $conn->query( "SELECT * FROM `internal_applicants` WHERE `id`='$applicant_id' ")->fetch_assoc();
-      $facility_id = $internal_applicants['facility_id'];
+      $applicant_id = $_POST['external_applicant_id'];
+      $external_applicants = $conn->query( "SELECT * FROM `external_applicants` WHERE `id`='$applicant_id' ")->fetch_assoc();
+      $facility_id = $external_applicants['facility_id'];
       $facility = $conn->query( "SELECT * FROM `facilities` WHERE `id` = '$facility_id'" )->fetch_assoc();
       $instrument_id = $facility['instrument_id'];
       $instrument = $conn->query( "SELECT * FROM `instruments` WHERE `id` = '$instrument_id'" )->fetch_assoc();
     ?>
 
-    
+   
     <div class="px-5 px-add" style="border:2px solid #f2f2f2; width: 1000px; background: #f2f2f2">
-        <h3 align="center" class="mb-4 mt-4">Applicant Number : <span style="color: red"><?= $internal_applicants['id']?></span></h3>
+        <h3 align="center" class="mb-4 mt-4">Applicant Number : <span style="color: red"><?= 'EXT'.$external_applicants['id']?></span></h3>
         <br>
             <table class="table table-bordered table-sm mb-4">
               <tr>
                 <td><b>Applicantion Id</b></td>
-                <td><?= $internal_applicants['id'] ?></td>
+                <td><?= 'EXT'.$external_applicants['id'] ?></td>
               </tr>
               <tr>
-                <td><b>Applicant's Full Name</b></td>
-                <td><?= $internal_applicants['name'] ?></td>
+                <td><b>Organization Type</b></td>
+                <td><?= $external_applicants['type'] ?></td>
               </tr>
               <tr>
-                <td><b>Applicant's ID Number</b></td>
-                <td><?= $internal_applicants['id_number'] ?></td>
+                <td><b>Organization Name</b></td>
+                <td><?= $external_applicants['organization'] ?></td>
+              </tr>
+              <tr>
+                <td><b>Address</b></td>
+                <td><?= $external_applicants['address'] ?></td>
+              </tr>
+              <tr>
+                <td><b>Applicant's Name</b></td>
+                <td><?= $external_applicants['name'] ?></td>
+              </tr>
+              <tr>
+                <td><b>Applicant's Designation</b></td>
+                <td><?= $external_applicants['designation'] ?></td>
               </tr>
               <tr>
                 <td><b>Email</b></td>
-                <td><?= $internal_applicants['email'] ?></td>
+                <td><?= $external_applicants['email'] ?></td>
               </tr>
               <tr>
                 <td><b>Contact</b></td>
-                <td><?= $internal_applicants['contact'] ?></td>
+                <td><?= $external_applicants['contact'] ?></td>
               </tr>
               <tr>
                 <td><b>Instrument</b></td>
@@ -45,12 +57,12 @@
                 <td><?= $facility['facility'] ?></td>
               </tr>
               <tr>
-                <td><b>Sample Data</b></td>
+                <td><b>Sample's Form Data</b></td>
                 <td>
-                  <?php if($internal_applicants['form_values'] != "") : ?>
+                  <?php if($external_applicants['form_values'] != "") : ?>
                     <?php 
                       $form_labels = json_decode($instrument['form_factors']);
-                      $form_values = unserialize($internal_applicants['form_values']); 
+                      $form_values = unserialize($external_applicants['form_values']); 
                     ?>
                   <ul class="m-2">
                     <?php foreach($form_values as $index => $value) : ?>
@@ -62,24 +74,34 @@
               </tr>
               <tr>
                 <td><b>Number of Samples</b></td>
-                <td><?= $internal_applicants['nos'] ?></td>
+                <td><?= $external_applicants['nos'] ?></td>
               </tr>
               <tr>
                 <td><b>Additional Message</b></td>
-                <td><?= $internal_applicants['message'] ?></td>
+                <td><?= $external_applicants['message'] ?></td>
+              </tr>
+              <tr>
+                <td><b>Amount Paid</b></td>
+                <td>
+                  <button type="button" class="btn btn-danger btn-sm w-50" ><?= $external_applicants['amount_paid'] ?></button>
+                </td>
+              </tr>
+              <tr>
+                <td><b>GST Exemption</b></td>
+                <td><?= $external_applicants['gst_exemption'] ?></td>
               </tr>
               <tr>
                 <td><b>Date - Time</b></td>
-                <td><?= $internal_applicants['timestamp'] ?></td>
+                <td><?= $external_applicants['timestamp'] ?></td>
               </tr>
               <tr>
                 <td><b>Application status</b></td>
                 <td>
-                  <?php if ($internal_applicants['status'] == 1) 
+                  <?php if ($external_applicants['status'] == 1) 
                           echo '<span class="badge badge-info p-2">New Applicant</span>'; 
-                          else if ( $internal_applicants['status'] == 2)
+                          else if ( $external_applicants['status'] == 2)
                           echo '<span class="badge badge-danger p-2">Rejected</span>';
-                          else if ( $internal_applicants['status'] == 3)
+                          else if ( $external_applicants['status'] == 3)
                           echo '<span class="badge badge-success p-2">Completed</span>';
                           else
                           echo '<span class="badge badge-warning p-2">Under Process</span>';
@@ -88,16 +110,16 @@
               </tr>
             </table>
 
-            <form action="../database/admin_data.php" method="POST">
-              <input type="hidden" name="niper_personnel_id" value="<?= $internal_applicants['id'] ?>">
+            <form action="../database/external-applicants-data.php" method="POST">
+              <input type="hidden" name="external_applicant_id" value="<?= $external_applicants['id'] ?>">
               <div class="row mb-4 justify-content-center">
                   <?php 
-                    if ($internal_applicants['status'] == 1)
+                    if ($external_applicants['status'] == 1)
                       echo '<div class="col-md-6"><input type="submit" name="application_accept" class="btn btn-success w-100" value="Accept"></div>
                         <div class="col-md-6"><button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#reject_reason">Reject</button></div>';
-                    else if ($internal_applicants['status'] == 2)
+                    else if ($external_applicants['status'] == 2)
                       echo '<div class="col-md-12"><input type="submit" name="application_delete" class="btn btn-danger w-100" value="Delete"></div>';
-                    else if ($internal_applicants['status'] == 3)
+                    else if ($external_applicants['status'] == 3)
                       echo '';
                     else
                       echo '<div class="col-md-6"><button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#send_report">Send Report</button></div><div class="col-md-6"><button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#reject_reason">Reject</button></div>';
@@ -116,15 +138,15 @@
                   </div>
                   
                   <div class="modal-body">
-                    <form action="../database/admin_data.php" method="POST" enctype="multipart/form-data" onsubmit="send_mail_loader_load()">
+                    <form action="../database/external-applicants-data.php" method="POST" enctype="multipart/form-data" onsubmit="send_mail_loader_load()">
 
-                      <input type="hidden" name="niper_personnel_id" value="<?= $internal_applicants['id'] ?>">
+                      <input type="hidden" name="external_applicant_id" value="<?= $external_applicants['id'] ?>">
                       <div class="form-group mt-4 mb-4">
                         <label>Send Email Report to: </label>
-                        <input type="text" class="form-control" name="email" value="<?= $internal_applicants['email'] ?>" placeholder="Recipient's Email">
+                        <input type="text" class="form-control" name="email" value="<?= $external_applicants['email'] ?>" placeholder="Recipient's Email">
                       </div>
                       <div class="form-group mb-4">
-                        <textarea class="form-control" name="message-body" placeholder="Message Body" rows="3">Please find the report of your CIF Test at NIPER Ahmedabad for the Application Number <?= $internal_applicants['id'] ?> in the attachment below.
+                        <textarea class="form-control" name="message-body" placeholder="Message Body" rows="3">Please find the report of your CIF Test at NIPER Ahmedabad for the Application Number EXT<?= $external_applicants['id'] ?> in the attachment below.
                         </textarea>
                       </div>
                       <div class="form-group mb-4">
@@ -165,22 +187,18 @@
                   </div>
                   
                   <div class="modal-body">
-                    <form action="../database/admin_data.php" method="POST" enctype="multipart/form-data" onsubmit="send_mail_loader_load_2()">
+                    <form action="../database/external-applicants-data.php" method="POST" enctype="multipart/form-data" onsubmit="send_mail_loader_load_2()">
 
-                      <input type="hidden" name="niper_personnel_id" value="<?= $internal_applicants['id'] ?>">
+                      <input type="hidden" name="external_applicant_id" value="<?= $external_applicants['id'] ?>">
                       <div class="form-group mt-4 mb-4">
                         <label>Send Email to: </label>
-                        <input type="text" class="form-control" name="email" value="<?= $internal_applicants['email'] ?>" placeholder="Recipient's Email">
+                        <input type="text" class="form-control" name="email" value="<?= $external_applicants['email'] ?>" placeholder="Recipient's Email">
                       </div>
                       <div class="form-group mb-5">
-                        <textarea class="form-control" name="message-body" placeholder="Message Body" rows="4">Your application for your CIF Test at NIPER Ahmedabad for the Application ID <?= $internal_applicants['id'] ?> has been rejected because of inappropriate filling of form. Please try again.
+                        <textarea class="form-control" name="message-body" placeholder="Message Body" rows="4">Your application for your CIF Test at NIPER Ahmedabad for the Application ID EXT<?= $external_applicants['id'] ?> has been rejected because of inappropriate filling of form. Please try again.
                         </textarea>
                       </div>
-                      <!--
-                      <div class="form-group mb-4">
-                        <input type="file" name="file" class="form-control" style="height:auto">
-                      </div>
-                    -->
+
                       <input type="submit" class="btn btn-danger w-100 mb-4" name="application_reject" value="Reject Application">
                     </form>
                   </div>
@@ -203,9 +221,9 @@
     </div>
     
 
-<?php else :?>
-  <h1 style="width: 100%; height: 40vh">Access Denied</h1>
-<?php endif; ?>
+  <?php else :?>
+    <h1 style="width: 100%; height: 40vh">Access Denied</h1>
+  <?php endif; ?>
 </div>
 
 <?php include DIRNAME(__DIR__).'/layouts/master_layout_bottom.php'; ?>

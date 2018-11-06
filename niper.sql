@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2018 at 04:50 PM
+-- Generation Time: Nov 02, 2018 at 03:06 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -73,7 +73,7 @@ INSERT INTO `facilities` (`id`, `instrument_id`, `facility`, `industry_charge`, 
 (4, 1, 'MS-MS', 8500, 4250, 'per mode', 1),
 (5, 1, 'HRMS-MS', 10000, 5000, 'per mode', 1),
 (6, 2, 'Qualitative Analysis', 3500, 1750, 'per run (max 3 runs)', 1),
-(7, 2, 'Quantitative Analysis', 1500, 750, 'per run', 0),
+(7, 2, 'Quantitative Analysis', 1500, 750, 'per run', 1),
 (8, 3, 'Standard Test', 1500, 750, 'per sample', 1),
 (9, 4, 'Standard Test', 1500, 750, 'per sample', 1),
 (10, 5, 'Standard Test', 7000, 3500, 'per run', 1),
@@ -112,7 +112,7 @@ CREATE TABLE `instruments` (
 --
 
 INSERT INTO `instruments` (`id`, `instrument`, `admin_id`, `form_factors`) VALUES
-(1, 'LC-MS-QTOF', 1, ''),
+(1, 'LC-MS-QTOF', 1, '[{\"type\":\"text\",\"label\":\"Text1\"},{\"type\":\"select\",\"label\":\"Choice\",\"choices\":[\" opt1\",\"opt2\",\"opt3\"]},{\"type\":\"select\",\"label\":\"Choice2\",\"choices\":[\" opt1\",\"opt2\",\"opt3\"]}]'),
 (2, 'HPLC', 1, ''),
 (3, 'FTIR', 1, ''),
 (4, 'ATR', 1, ''),

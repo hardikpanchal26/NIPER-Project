@@ -18,8 +18,9 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 
     <script type="text/javascript" src="../assets/javascript/functions.js"></script>
+    <script type="text/javascript" src="../assets/javascript/validations.js"></script>
     <script type="text/javascript" src="../assets/javascript/general.js"></script>
-      <script type="text/javascript" src="../assets/javascript/cost_calculator.js"></script>
+    <script type="text/javascript" src="../assets/javascript/cost_calculator.js"></script>
       <script type="text/javascript">
           $(window).on('load', function() {
              $('.loader-bg').hide();

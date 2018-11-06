@@ -51,7 +51,7 @@ if (isset($_POST['instrument_id2']) ) {
 
 if (isset($_POST['facility_id']) ) {
     $facility_id = $_POST['facility_id'];
-    $facilities  = $conn->query("SELECT * FROM `facilities` WHERE `id` = '$facility_id'");
+    $facilities  = $conn->query("SELECT `industry_charge`,`institute_charge` FROM `facilities` WHERE `id` = '$facility_id'");
 
     $facility = $facilities->fetch_assoc();
     echo json_encode($facility);

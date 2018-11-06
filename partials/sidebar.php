@@ -5,7 +5,7 @@ $name_string = ucwords(str_replace("-"," ",$url_beardcrumb_name));
 
 
 if (isset($_SESSION['admin_logged_in']) ) : ?>
-  <div class="sideBar">
+  <div class="sideMenu">
     <div id="ContentPlaceHolder1_UserLeftMiddleMenu1_LeftMenu" class="rightMenu" style="background: #212529">
       <h2>Admin Dashboard</h2>
       <ul id='menuLeft' class='pageLink'>
@@ -13,7 +13,10 @@ if (isset($_SESSION['admin_logged_in']) ) : ?>
           <a href="<?php echo site_url().'/admin/niper-admin.php'; ?>" target='_self' title='Dashboard' style="color: #aeaeae"><i class="fa fa-dashboard pr-2"></i> Dashboard</a>
         </li>
         <li>
-          <a href="<?php echo site_url().'/admin/internal-applicants.php'; ?>" target='_self' title='Applicants / Job Orderes' style="color: #aeaeae"><i class="fa fa-users pr-2"></i> Applicants / Job Orderes</a>
+          <a href="<?php echo site_url().'/admin/internal-applicants.php'; ?>" target='_self' title='Internal Applicants' style="color: #aeaeae"><i class="fa fa-users pr-2"></i> Internal Applicants </a>
+        </li>
+        <li>
+          <a href="<?php echo site_url().'/admin/external-applicants.php'; ?>" target='_self' title='External Applicants' style="color: #aeaeae"><i class="fa fa-users pr-2"></i> External Applicants </a>
         </li>
         <li>
           <a href="<?php echo site_url().'/admin/instrument-list.php'; ?>" target='_self' title='Instrument List' style="color: #aeaeae"><i class="fa fa-list pr-2"></i> Instrumentation Facility List</a>
@@ -33,7 +36,7 @@ if (isset($_SESSION['admin_logged_in']) ) : ?>
   </div>
 
 <?php else : ?>
-  <div class="sideBar">
+  <div class="sideMenu">
     <div id="ContentPlaceHolder1_UserLeftMiddleMenu1_LeftMenu" class="rightMenu">
       <span class='heading'>Instrument Facility</span>
       <ul id='menuLeft' class='pageLink'>
@@ -41,13 +44,10 @@ if (isset($_SESSION['admin_logged_in']) ) : ?>
           <a href=<?php echo site_url().'/users/instrument-list-and-charges.php'; ?> target='_self' title='Instrument List and Charges' ><i class="fa fa-flask pr-2"></i> Instrument List and Charges</a>
         </li>
         <li>
-          <a href=<?php echo site_url().'/users/niper-personnel.php'?> target='_self' title='NIPER Personnel' ><i class="fa fa-graduation-cap pr-2"></i> NIPER Personnel</a>
+          <a href=<?php echo site_url().'/users/niper-applicants.php'?> target='_self' title='NIPER Applicants' ><i class="fa fa-graduation-cap pr-2"></i> NIPER Applicants</a>
         </li>
         <li>
-          <a href=<?php echo site_url().'/users/institutes-govt-and-private.php'?> target='_self' title='Institutes Govt and Private' ><i class="fa fa-university pr-2"></i> Institutes (Govt. and Private)</a>
-        </li>
-        <li>
-          <a href=<?php echo site_url().'/users/industries.php'?> target='_self' title='Industries' ><i class="fa fa-industry pr-2"></i> Industries</a>
+          <a href=<?php echo site_url().'/users/external-applicants.php'?> target='_self' title='External Applicants' ><i class="fa fa-university pr-2"></i> External Applicants</a>
         </li>
         <li>
           <a href=<?php echo site_url().'/users/check-status.php'?> target='_self' title='Check Status' ><i class="fa fa-tasks pr-2"></i> Check Status</a>
